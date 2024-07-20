@@ -9,8 +9,8 @@ public class Selection : MonoBehaviour
     public Material selectionMaterial;
     public TextMeshProUGUI textName;
 
-    private Material _originalMaterialHighlight;
-    private Material _originalMaterialSelection;
+    private Material[] _originalMaterialHighlight;
+    private Material[] _originalMaterialSelection;
     private Transform _highlight;
     private Transform _selection;
     private RaycastHit _raycastHit;
@@ -37,7 +37,7 @@ public class Selection : MonoBehaviour
     {
         if (_highlight)
         {
-            _highlight.GetComponent<MeshRenderer>().sharedMaterial = _originalMaterialHighlight;
+            _highlight.GetComponent<MeshRenderer>().materials = _originalMaterialHighlight;
             _highlight = null;
         }
         
@@ -52,6 +52,7 @@ public class Selection : MonoBehaviour
             else
             {
                 _highlight = null;
+                textName.text = "NO NAME";
             }
         }
     }
@@ -62,13 +63,18 @@ public class Selection : MonoBehaviour
         {
             if (_selection)
             {
-                _selection.GetComponent<MeshRenderer>().material = _originalMaterialSelection;
+                _selection.GetComponent<MeshRenderer>().materials = _originalMaterialSelection;
             }
             _selection = _raycastHit.transform;
             if (_selection.GetComponent<MeshRenderer>().material != selectionMaterial)
             {
                 _originalMaterialSelection = _originalMaterialHighlight;
-                _selection.GetComponent<MeshRenderer>().material = selectionMaterial;
+                Material[] newMaterials = new Material[_selection.GetComponent<MeshRenderer>().materials.Length];
+                for (int i = 0; i < newMaterials.Length; i++)
+                {
+                    newMaterials[i] = selectionMaterial;
+                }
+                _selection.GetComponent<MeshRenderer>().materials = newMaterials;
             }
             _highlight = null;
         }
@@ -76,7 +82,7 @@ public class Selection : MonoBehaviour
         {
             if (_selection)
             {
-                _selection.GetComponent<MeshRenderer>().material = _originalMaterialSelection;
+                _selection.GetComponent<MeshRenderer>().materials = _originalMaterialSelection;
                 _selection = null;
             }
         }
@@ -89,8 +95,13 @@ public class Selection : MonoBehaviour
         {
             if (renderer.material != highlightMaterial)
             {
-                _originalMaterialHighlight = renderer.material;
-                renderer.material = highlightMaterial;
+                _originalMaterialHighlight = renderer.materials;
+                Material[] newMaterials = new Material[renderer.materials.Length];
+                for (int i = 0; i < newMaterials.Length; i++)
+                {
+                    newMaterials[i] = highlightMaterial;
+                }
+                renderer.materials = newMaterials;
                 
                 SelectableElement selectableElement = obj.GetComponent<SelectableElement>();
                 if (selectableElement)
