@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,6 +7,7 @@ public class Selection : MonoBehaviour
     public Camera playerCamera;
     public Material highlightMaterial;
     public Material selectionMaterial;
+    public TextMeshProUGUI textName;
 
     private Material _originalMaterialHighlight;
     private Material _originalMaterialSelection;
@@ -89,6 +91,12 @@ public class Selection : MonoBehaviour
             {
                 _originalMaterialHighlight = renderer.material;
                 renderer.material = highlightMaterial;
+                
+                SelectableElement selectableElement = obj.GetComponent<SelectableElement>();
+                if (selectableElement)
+                {
+                    textName.text = selectableElement.name;
+                }
             }
         }
     }
