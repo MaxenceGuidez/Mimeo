@@ -91,18 +91,5 @@ public class Selection : MonoBehaviour
                 renderer.material = highlightMaterial;
             }
         }
-        
-        foreach (GameObject child in obj)
-        {
-            renderer = child.GetComponent<MeshRenderer>();
-            if (renderer)
-            {
-                if (renderer.material != highlightMaterial)
-                {
-                    _originalMaterialHighlight = renderer.material;
-                    renderer.material = highlightMaterial;
-                }
-            }
-        }
     }
 }
