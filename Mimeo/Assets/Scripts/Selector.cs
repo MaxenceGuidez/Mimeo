@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 // Credits : https://www.youtube.com/watch?v=A0Kd6lnBNRE
 public class Selection : MonoBehaviour
