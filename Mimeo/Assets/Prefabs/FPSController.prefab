@@ -168,7 +168,7 @@ MonoBehaviour:
   playerCamera: {fileID: 8935063278266361150}
   moveSpeed: 6
   runSpeed: 12
-  lookSpeed: 2
+  lookSpeed: 25
   lookXLimit: 85
 --- !u!1 &6787274411275156784
 GameObject:
