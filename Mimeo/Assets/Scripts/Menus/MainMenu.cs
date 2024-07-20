@@ -1,18 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject settingsMenu;
+
+    private void Start()
     {
-        
+        settingsMenu.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnClickBtnVisit()
     {
-        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+    
+    public void OnClickBtnSettings()
+    {
+        gameObject.SetActive(false);
+        settingsMenu.SetActive(true);
+    }
+    
+    public void OnClickBtnQuit()
+    {
+        Application.Quit();
     }
 }
