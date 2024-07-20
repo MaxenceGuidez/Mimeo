@@ -1,6 +1,6 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-// Credits : https://www.youtube.com/watch?v=A0Kd6lnBNRE
 public class Selection : MonoBehaviour
 {
     public Camera playerCamera;
@@ -12,15 +12,33 @@ public class Selection : MonoBehaviour
     private Transform _highlight;
     private Transform _selection;
     private RaycastHit _raycastHit;
+    private MainInputs _mainInputs;
+
+    private void Awake()
+    {
+        _mainInputs = new MainInputs();
+    }
+
+    private void OnEnable()
+    {
+        _mainInputs.Selector.Enable();
+        _mainInputs.Selector.Select.performed += Select;
+    }
+
+    private void OnDisable()
+    {
+        _mainInputs.Selector.Disable();
+        _mainInputs.Selector.Select.performed -= Select;
+    }
 
     void Update()
     {
-        #region Highlight
-        if (_highlight != null)
+        if (_highlight)
         {
             _highlight.GetComponent<MeshRenderer>().sharedMaterial = _originalMaterialHighlight;
             _highlight = null;
         }
+        
         Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         if (Physics.Raycast(ray, out _raycastHit))
         {
@@ -34,41 +52,38 @@ public class Selection : MonoBehaviour
                 _highlight = null;
             }
         }
-        #endregion
+    }
 
-        #region Selection
-        if (Input.GetMouseButtonDown(0))
+    private void Select(InputAction.CallbackContext context)
+    {
+        if (_highlight)
         {
-            if (_highlight)
+            if (_selection)
             {
-                if (_selection != null)
-                {
-                    _selection.GetComponent<MeshRenderer>().material = _originalMaterialSelection;
-                }
-                _selection = _raycastHit.transform;
-                if (_selection.GetComponent<MeshRenderer>().material != selectionMaterial)
-                {
-                    _originalMaterialSelection = _originalMaterialHighlight;
-                    _selection.GetComponent<MeshRenderer>().material = selectionMaterial;
-                }
-                _highlight = null;
+                _selection.GetComponent<MeshRenderer>().material = _originalMaterialSelection;
             }
-            else
+            _selection = _raycastHit.transform;
+            if (_selection.GetComponent<MeshRenderer>().material != selectionMaterial)
             {
-                if (_selection)
-                {
-                    _selection.GetComponent<MeshRenderer>().material = _originalMaterialSelection;
-                    _selection = null;
-                }
+                _originalMaterialSelection = _originalMaterialHighlight;
+                _selection.GetComponent<MeshRenderer>().material = selectionMaterial;
+            }
+            _highlight = null;
+        }
+        else
+        {
+            if (_selection)
+            {
+                _selection.GetComponent<MeshRenderer>().material = _originalMaterialSelection;
+                _selection = null;
             }
         }
-        #endregion
     }
+
     private void HighlightObject(Transform obj)
     {
-        // Check and apply highlight to the object itself
         MeshRenderer renderer = obj.GetComponent<MeshRenderer>();
-        if (renderer != null)
+        if (renderer)
         {
             if (renderer.material != highlightMaterial)
             {
@@ -77,11 +92,10 @@ public class Selection : MonoBehaviour
             }
         }
         
-        // Check and apply highlight to all children
         foreach (GameObject child in obj)
         {
             renderer = child.GetComponent<MeshRenderer>();
-            if (renderer != null)
+            if (renderer)
             {
                 if (renderer.material != highlightMaterial)
                 {
@@ -91,5 +105,4 @@ public class Selection : MonoBehaviour
             }
         }
     }
-
 }

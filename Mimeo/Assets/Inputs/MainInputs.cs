@@ -255,6 +255,45 @@ public partial class @MainInputs: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Selector"",
+            ""id"": ""e513e697-1291-45d1-8684-dcb1254bdac4"",
+            ""actions"": [
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""7feb22dd-5e32-488f-9190-9b0970fa86e3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""6ed2613c-a0be-47c6-90ed-460b7897cfff"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7e45944f-056a-474c-a7bd-18a3f77b8ac9"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -298,6 +337,9 @@ public partial class @MainInputs: IInputActionCollection2, IDisposable
         m_FPSController_Move = m_FPSController.FindAction("Move", throwIfNotFound: true);
         m_FPSController_Look = m_FPSController.FindAction("Look", throwIfNotFound: true);
         m_FPSController_Sprint = m_FPSController.FindAction("Sprint", throwIfNotFound: true);
+        // Selector
+        m_Selector = asset.FindActionMap("Selector", throwIfNotFound: true);
+        m_Selector_Select = m_Selector.FindAction("Select", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -417,6 +459,52 @@ public partial class @MainInputs: IInputActionCollection2, IDisposable
         }
     }
     public FPSControllerActions @FPSController => new FPSControllerActions(this);
+
+    // Selector
+    private readonly InputActionMap m_Selector;
+    private List<ISelectorActions> m_SelectorActionsCallbackInterfaces = new List<ISelectorActions>();
+    private readonly InputAction m_Selector_Select;
+    public struct SelectorActions
+    {
+        private @MainInputs m_Wrapper;
+        public SelectorActions(@MainInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Select => m_Wrapper.m_Selector_Select;
+        public InputActionMap Get() { return m_Wrapper.m_Selector; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(SelectorActions set) { return set.Get(); }
+        public void AddCallbacks(ISelectorActions instance)
+        {
+            if (instance == null || m_Wrapper.m_SelectorActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_SelectorActionsCallbackInterfaces.Add(instance);
+            @Select.started += instance.OnSelect;
+            @Select.performed += instance.OnSelect;
+            @Select.canceled += instance.OnSelect;
+        }
+
+        private void UnregisterCallbacks(ISelectorActions instance)
+        {
+            @Select.started -= instance.OnSelect;
+            @Select.performed -= instance.OnSelect;
+            @Select.canceled -= instance.OnSelect;
+        }
+
+        public void RemoveCallbacks(ISelectorActions instance)
+        {
+            if (m_Wrapper.m_SelectorActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ISelectorActions instance)
+        {
+            foreach (var item in m_Wrapper.m_SelectorActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_SelectorActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public SelectorActions @Selector => new SelectorActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -449,5 +537,9 @@ public partial class @MainInputs: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
+    }
+    public interface ISelectorActions
+    {
+        void OnSelect(InputAction.CallbackContext context);
     }
 }

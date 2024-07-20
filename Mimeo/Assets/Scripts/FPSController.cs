@@ -21,6 +21,14 @@ public class FPSController : MonoBehaviour
         _mainInputs = new MainInputs();
     }
 
+    void Start()
+    {
+        _characterController = GetComponent<CharacterController>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        _currentSpeed = moveSpeed;
+    }
+
     private void OnEnable()
     {
         _mainInputs.FPSController.Enable();
@@ -33,14 +41,6 @@ public class FPSController : MonoBehaviour
         _mainInputs.FPSController.Disable();
         _mainInputs.FPSController.Sprint.performed -= Sprint;
         _mainInputs.FPSController.Sprint.canceled -= SprintCanceled;
-    }
-
-    void Start()
-    {
-        _characterController = GetComponent<CharacterController>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        _currentSpeed = moveSpeed;
     }
 
     void Update()
