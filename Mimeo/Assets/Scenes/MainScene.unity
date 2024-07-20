@@ -507,6 +507,10 @@ PrefabInstance:
       propertyPath: textName
       value: 
       objectReference: {fileID: 83959227}
+    - target: {fileID: 1943996466999593650, guid: d76f3a088858e7b46b5956ba1a10210a, type: 3}
+      propertyPath: panelInfos
+      value: 
+      objectReference: {fileID: 7228593142500542343}
     - target: {fileID: 5004729279958473993, guid: d76f3a088858e7b46b5956ba1a10210a, type: 3}
       propertyPath: m_Name
       value: FPSController
@@ -668,13 +672,34 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5539824842165845215, guid: eeb64f8c9856f61439e92cfb73892a26, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7228593142500542343}
   m_SourcePrefab: {fileID: 100100000, guid: eeb64f8c9856f61439e92cfb73892a26, type: 3}
+--- !u!1 &5595723683240177842 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5539824842165845215, guid: eeb64f8c9856f61439e92cfb73892a26, type: 3}
+  m_PrefabInstance: {fileID: 4236015812723393450}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &7220610882924452446 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7104928942572049744, guid: eeb64f8c9856f61439e92cfb73892a26, type: 3}
   m_PrefabInstance: {fileID: 4236015812723393450}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7228593142500542343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5595723683240177842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79b5c5cdc0e2804429d0d4b0f822be7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationDuration: 0.5
 --- !u!4 &9082343065714640533 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5745416478973143597, guid: ae5da690753ad6f4191a571ed92fb101, type: 3}

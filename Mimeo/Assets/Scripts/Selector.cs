@@ -8,6 +8,7 @@ public class Selection : MonoBehaviour
     public Material highlightMaterial;
     public Material selectionMaterial;
     public TextMeshProUGUI textName;
+    public PanelInfos panelInfos;
 
     private Material[] _originalMaterialHighlight;
     private Material[] _originalMaterialSelection;
@@ -75,6 +76,8 @@ public class Selection : MonoBehaviour
                     newMaterials[i] = selectionMaterial;
                 }
                 _selection.GetComponent<MeshRenderer>().materials = newMaterials;
+
+                panelInfos.Open();
             }
             _highlight = null;
         }
