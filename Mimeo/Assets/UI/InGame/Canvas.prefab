@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 81102057897686361}
   - component: {fileID: 5789642312564559094}
   m_Layer: 5
-  m_Name: InputField (TMP)
+  m_Name: InputFieldDescription
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -372,7 +372,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: NO DESCRIPTION
+  m_Text: 
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -823,7 +823,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "NO DESCRIPTION\u200B"
+  m_text: "\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -856,7 +856,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -1790,7 +1790,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -2289,7 +2289,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79b5c5cdc0e2804429d0d4b0f822be7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textName: {fileID: 6915754099463672894}
+  lineNameDisplay: {fileID: 6915754099463672894}
+  TextFieldName: {fileID: 8845802649652046066}
+  TextFieldDescription: {fileID: 5789642312564559094}
+  dropdownColor: {fileID: 1036057322424006178}
+  dropdownTexture: {fileID: 827458627862247593}
   animationDuration: 0.2
 --- !u!1 &3875660814906376444
 GameObject:
@@ -2304,7 +2308,7 @@ GameObject:
   - component: {fileID: 1745799331578587480}
   - component: {fileID: 8845802649652046066}
   m_Layer: 5
-  m_Name: InputField (TMP)
+  m_Name: InputFieldName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3750,7 +3754,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7274996231360642127}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 

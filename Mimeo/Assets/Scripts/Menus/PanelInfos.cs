@@ -1,11 +1,17 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class PanelInfos : MonoBehaviour
 {
-    public GameObject textName;
+    public GameObject lineNameDisplay;
+    public TMP_InputField TextFieldName;
+    public TMP_InputField TextFieldDescription;
+    public TMP_Dropdown dropdownColor;
+    public TMP_Dropdown dropdownTexture;
     public float animationDuration = .2f;
 
+    private SelectableElement _selectedElement;
     private Vector3 _closedPosition;
     private Vector3 _openPosition;
     private bool _isAnimating;
@@ -16,12 +22,18 @@ public class PanelInfos : MonoBehaviour
         _openPosition = _closedPosition - new Vector3(0, 650, 0);
     }
 
-    public void Open()
+    public void Open(SelectableElement selected)
     {
+        if (!selected) return;
+        _selectedElement = selected;
+
+        TextFieldName.text = _selectedElement.name;
+        TextFieldDescription.text = _selectedElement.description;
+        
         if (!_isAnimating)
         {
             StartCoroutine(TranslateUIElementTo(transform, _openPosition));
-            textName.SetActive(false);
+            lineNameDisplay.SetActive(false);
         }
     }
 
@@ -30,7 +42,7 @@ public class PanelInfos : MonoBehaviour
         if (!_isAnimating)
         {
             StartCoroutine(TranslateUIElementTo(transform, _closedPosition));
-            textName.SetActive(true);
+            lineNameDisplay.SetActive(true);
         }
     }
 
