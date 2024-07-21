@@ -16,17 +16,18 @@ public class Selector : MonoBehaviour
     private Transform _highlight;
     private Transform _selection;
     private RaycastHit _raycastHit;
-    private FPSController _fpsController;
     private MeshRenderer _previousSelectedElement;
     private MeshRenderer _previousHighlightedElement;
     private float _oldLookSpeed;
     private bool _isSelecting;
     private bool _isHighlighting;
-
+    
+    public static Selector instance { get; private set; }
+    
     private void Awake()
     {
-        FPSController controller = transform.GetComponent<FPSController>();
-        if (controller) _fpsController = controller;
+        if (instance && instance != this)  Destroy(this); 
+        else instance = this;
     }
 
     void Update()
@@ -79,9 +80,9 @@ public class Selector : MonoBehaviour
             
             InputsManager.instance.mainInputs.FPSController.Move.Disable();
 
-            float actualLookSpeed = _fpsController.lookSpeed;
+            float actualLookSpeed = FPSController.instance.lookSpeed;
             if (!Mathf.Approximately(actualLookSpeed, 2f)) _oldLookSpeed = actualLookSpeed;
-            _fpsController.lookSpeed = 2f;
+            FPSController.instance.lookSpeed = 2f;
             
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -99,7 +100,7 @@ public class Selector : MonoBehaviour
         _selection = null;
         
         InputsManager.instance.mainInputs.FPSController.Move.Enable();
-        _fpsController.lookSpeed = _oldLookSpeed;
+        FPSController.instance.lookSpeed = _oldLookSpeed;
         
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

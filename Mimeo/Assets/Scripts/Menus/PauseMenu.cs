@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -8,7 +7,6 @@ public class PauseMenu : MonoBehaviour
     public SettingsMenu settingsMenu;
     public GameObject crosshair;
     public PanelInfos panelInfos;
-    public Selector selector;
 
     private void Start()
     {
@@ -21,8 +19,8 @@ public class PauseMenu : MonoBehaviour
         InputsManager.instance.mainInputs.Selector.Disable();
 
         panelInfos.CloseDirectly();
-        selector.Unselect();
-        selector.UnhighlightObject();
+        Selector.instance.Unselect();
+        Selector.instance.UnhighlightObject();
         
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

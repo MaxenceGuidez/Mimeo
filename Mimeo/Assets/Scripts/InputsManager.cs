@@ -3,8 +3,6 @@ using UnityEngine.InputSystem;
 
 public class InputsManager : MonoBehaviour
 {
-    public FPSController fpsController;
-    public Selector selector;
     public PauseMenu pauseMenu;
     public MainInputs mainInputs;
     
@@ -48,22 +46,22 @@ public class InputsManager : MonoBehaviour
 
     private void Sprint(InputAction.CallbackContext context)
     {
-        fpsController.Sprint(true);
+        FPSController.instance.Sprint(true);
     }
 
     private void SprintCanceled(InputAction.CallbackContext context)
     {
-        fpsController.Sprint(false);
+        FPSController.instance.Sprint(false);
     }
 
     private void Select(InputAction.CallbackContext context)
     {
-        selector.Select();
+        Selector.instance.Select();
     }
 
     private void Unselect(InputAction.CallbackContext context)
     {
-        selector.Unselect();
+        Selector.instance.Unselect();
     }
 
     private void Pause(InputAction.CallbackContext context)

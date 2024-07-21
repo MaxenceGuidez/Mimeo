@@ -13,6 +13,14 @@ public class FPSController : MonoBehaviour
     private Vector3 _moveDirection = Vector3.zero;
     private float _currentSpeed;
     private float _rotationX;
+    
+    public static FPSController instance { get; private set; }
+    
+    private void Awake()
+    {
+        if (instance && instance != this)  Destroy(this); 
+        else instance = this;
+    }
 
     void Start()
     {
