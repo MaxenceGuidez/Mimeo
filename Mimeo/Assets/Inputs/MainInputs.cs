@@ -268,6 +268,15 @@ public partial class @MainInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Unselect"",
+                    ""type"": ""Button"",
+                    ""id"": ""b547a619-1bc7-4851-8275-ee83b2a0d14a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -290,6 +299,28 @@ public partial class @MainInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""78556224-2496-41b8-bc16-e40b8ace6267"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse"",
+                    ""action"": ""Unselect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""15457624-b286-4644-adf6-74ce8f91f3db"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Unselect"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -410,6 +441,7 @@ public partial class @MainInputs: IInputActionCollection2, IDisposable
         // Selector
         m_Selector = asset.FindActionMap("Selector", throwIfNotFound: true);
         m_Selector_Select = m_Selector.FindAction("Select", throwIfNotFound: true);
+        m_Selector_Unselect = m_Selector.FindAction("Unselect", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Pause = m_Menu.FindAction("Pause", throwIfNotFound: true);
@@ -538,11 +570,13 @@ public partial class @MainInputs: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Selector;
     private List<ISelectorActions> m_SelectorActionsCallbackInterfaces = new List<ISelectorActions>();
     private readonly InputAction m_Selector_Select;
+    private readonly InputAction m_Selector_Unselect;
     public struct SelectorActions
     {
         private @MainInputs m_Wrapper;
         public SelectorActions(@MainInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Select => m_Wrapper.m_Selector_Select;
+        public InputAction @Unselect => m_Wrapper.m_Selector_Unselect;
         public InputActionMap Get() { return m_Wrapper.m_Selector; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -555,6 +589,9 @@ public partial class @MainInputs: IInputActionCollection2, IDisposable
             @Select.started += instance.OnSelect;
             @Select.performed += instance.OnSelect;
             @Select.canceled += instance.OnSelect;
+            @Unselect.started += instance.OnUnselect;
+            @Unselect.performed += instance.OnUnselect;
+            @Unselect.canceled += instance.OnUnselect;
         }
 
         private void UnregisterCallbacks(ISelectorActions instance)
@@ -562,6 +599,9 @@ public partial class @MainInputs: IInputActionCollection2, IDisposable
             @Select.started -= instance.OnSelect;
             @Select.performed -= instance.OnSelect;
             @Select.canceled -= instance.OnSelect;
+            @Unselect.started -= instance.OnUnselect;
+            @Unselect.performed -= instance.OnUnselect;
+            @Unselect.canceled -= instance.OnUnselect;
         }
 
         public void RemoveCallbacks(ISelectorActions instance)
@@ -669,6 +709,7 @@ public partial class @MainInputs: IInputActionCollection2, IDisposable
     public interface ISelectorActions
     {
         void OnSelect(InputAction.CallbackContext context);
+        void OnUnselect(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

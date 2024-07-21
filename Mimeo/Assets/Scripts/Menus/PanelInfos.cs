@@ -50,6 +50,12 @@ public class PanelInfos : MonoBehaviour
         }
     }
 
+    public void CloseDirectly()
+    {
+        transform.localPosition = _closedPosition;
+        lineNameDisplay.SetActive(true);
+    }
+
     private IEnumerator TranslateUIElementTo(Transform UIElement, Vector3 targetPosition)
     {
         _isAnimating = true;

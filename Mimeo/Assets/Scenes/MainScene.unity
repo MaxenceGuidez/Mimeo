@@ -815,6 +815,7 @@ MonoBehaviour:
   settingsMenu: {fileID: 3042452391161838155}
   crosshair: {fileID: 3042452391161838156}
   panelInfos: {fileID: 7228593142500542343}
+  selector: {fileID: 458840871}
 --- !u!1001 &3350696797158607745
 PrefabInstance:
   m_ObjectHideFlags: 0

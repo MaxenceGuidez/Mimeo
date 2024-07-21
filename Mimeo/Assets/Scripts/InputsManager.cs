@@ -27,6 +27,7 @@ public class InputsManager : MonoBehaviour
         mainInputs.FPSController.Sprint.performed += Sprint;
         mainInputs.FPSController.Sprint.canceled += SprintCanceled;
         mainInputs.Selector.Select.performed += Select;
+        mainInputs.Selector.Unselect.performed += Unselect;
         mainInputs.Menu.Pause.performed += Pause;
         mainInputs.Menu.Settings.performed += OpenSettings;
     }
@@ -40,6 +41,7 @@ public class InputsManager : MonoBehaviour
         mainInputs.FPSController.Sprint.performed -= Sprint;
         mainInputs.FPSController.Sprint.canceled -= SprintCanceled;
         mainInputs.Selector.Select.performed -= Select;
+        mainInputs.Selector.Unselect.performed -= Unselect;
         mainInputs.Menu.Pause.performed -= Pause;
         mainInputs.Menu.Settings.performed -= OpenSettings;
     }
@@ -57,6 +59,11 @@ public class InputsManager : MonoBehaviour
     private void Select(InputAction.CallbackContext context)
     {
         selector.Select();
+    }
+
+    private void Unselect(InputAction.CallbackContext context)
+    {
+        selector.Unselect();
     }
 
     private void Pause(InputAction.CallbackContext context)

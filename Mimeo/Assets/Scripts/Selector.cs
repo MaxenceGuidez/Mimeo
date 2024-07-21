@@ -16,8 +16,10 @@ public class Selector : MonoBehaviour
     private RaycastHit _raycastHit;
     private FPSController _fpsController;
     private MeshRenderer _previousSelectedElement;
+    private MeshRenderer _previousHighlightedElement;
     private float _oldLookSpeed;
     private bool _isSelecting;
+    private bool _isHighlighting;
 
     private void Awake()
     {
@@ -99,6 +101,9 @@ public class Selector : MonoBehaviour
         InputsManager.instance.mainInputs.FPSController.Move.Enable();
         _fpsController.lookSpeed = _oldLookSpeed;
         
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        
         _isSelecting = false;
     }
 
@@ -109,6 +114,8 @@ public class Selector : MonoBehaviour
         {
             if (renderer.material != highlightMaterial)
             {
+                _isHighlighting = true;
+                _previousHighlightedElement = renderer;
                 _originalMaterialHighlight = renderer.materials;
                 Material[] newMaterials = new Material[renderer.materials.Length];
                 for (int i = 0; i < newMaterials.Length; i++)
@@ -121,5 +128,14 @@ public class Selector : MonoBehaviour
                 if (selectableElement) textName.text = selectableElement.name;
             }
         }
+    }
+
+    public void UnhighlightObject()
+    {
+        if (!_isHighlighting) return;
+        
+        _previousHighlightedElement.materials = _originalMaterialHighlight;
+        
+        _isHighlighting = false;
     }
 }

@@ -17,26 +17,20 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause(bool goToSettings = false)
     {
+        EventSystem.current.SetSelectedGameObject(null);
+        InputsManager.instance.mainInputs.Selector.Disable();
+
+        panelInfos.CloseDirectly();
+        selector.Unselect();
+        selector.UnhighlightObject();
+        
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        EventSystem.current.SetSelectedGameObject(null);
-
-        selector.Unselect();
         
         gameObject.SetActive(!goToSettings);
-        StartCoroutine(PauseAfterAnimation(goToSettings));
-    }
-
-    private IEnumerator PauseAfterAnimation(bool goToSettings)
-    {
-        while (panelInfos.IsAnimating)
-        {
-            yield return null;
-        }
-        Time.timeScale = 0;
-
         settingsMenu.gameObject.SetActive(goToSettings);
         crosshair.SetActive(false);
+        Time.timeScale = 0;
     }
 
     public void Resume()
@@ -47,6 +41,7 @@ public class PauseMenu : MonoBehaviour
         
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        InputsManager.instance.mainInputs.Selector.Enable();
         
         Time.timeScale = 1;
     }
