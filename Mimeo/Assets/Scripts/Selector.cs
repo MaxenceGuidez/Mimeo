@@ -60,42 +60,38 @@ public class Selection : MonoBehaviour
 
     private void Select(InputAction.CallbackContext context)
     {
-        if (_highlight)
+        RaycastHit _hit;
+        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out _hit))
         {
-            if (_selection)
-            {
-                _selection.GetComponent<MeshRenderer>().materials = _originalMaterialSelection;
-            }
-            _selection = _raycastHit.transform;
-            if (_selection.GetComponent<MeshRenderer>().material != selectionMaterial)
-            {
-                _originalMaterialSelection = _originalMaterialHighlight;
-                Material[] newMaterials = new Material[_selection.GetComponent<MeshRenderer>().materials.Length];
-                for (int i = 0; i < newMaterials.Length; i++)
-                {
-                    newMaterials[i] = selectionMaterial;
-                }
-                _selection.GetComponent<MeshRenderer>().materials = newMaterials;
+            if (!_hit.transform.CompareTag("Selectable")) return;
+        }
 
-                SelectableElement selectableElement = _selection.GetComponent<SelectableElement>();
-                if (selectableElement)
-                {
-                    panelInfos.Open(selectableElement);
-                }
-                
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
-            _highlight = null;
-        }
-        else
+        if (!_highlight) return;
+        if (_selection) _selection.GetComponent<MeshRenderer>().materials = _originalMaterialSelection;
+            
+        _selection = _raycastHit.transform;
+        MeshRenderer renderer = _selection.GetComponent<MeshRenderer>();
+        if (renderer.material != selectionMaterial)
         {
-            if (_selection)
+            _originalMaterialSelection = _originalMaterialHighlight;
+            Material[] newMaterials = new Material[renderer.materials.Length];
+            for (int i = 0; i < newMaterials.Length; i++)
             {
-                _selection.GetComponent<MeshRenderer>().materials = _originalMaterialSelection;
-                _selection = null;
+                newMaterials[i] = selectionMaterial;
             }
+            renderer.materials = newMaterials;
+
+            SelectableElement selectableElement = _selection.GetComponent<SelectableElement>();
+            if (selectableElement)
+            {
+                panelInfos.Open(selectableElement);
+            }
+            
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
+        _highlight = null;
     }
 
     private void HighlightObject(Transform obj)
