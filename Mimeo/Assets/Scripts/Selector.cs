@@ -26,7 +26,7 @@ public class Selector : MonoBehaviour
     
     private void Awake()
     {
-        if (instance && instance != this)  Destroy(this); 
+        if (instance && instance != this) Destroy(this); 
         else instance = this;
     }
 

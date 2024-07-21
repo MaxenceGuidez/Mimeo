@@ -10,7 +10,7 @@ public class InputsManager : MonoBehaviour
     
     private void Awake()
     {
-        if (instance && instance != this)  Destroy(this); 
+        if (instance && instance != this) Destroy(this); 
         else instance = this;
         
         mainInputs = new MainInputs();
