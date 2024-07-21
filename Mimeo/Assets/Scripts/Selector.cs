@@ -1,8 +1,7 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class Selection : MonoBehaviour
+public class Selector : MonoBehaviour
 {
     public Camera playerCamera;
     public Material highlightMaterial;
@@ -15,23 +14,12 @@ public class Selection : MonoBehaviour
     private Transform _highlight;
     private Transform _selection;
     private RaycastHit _raycastHit;
-    private MainInputs _mainInputs;
+    private FPSController _fpsController;
 
     private void Awake()
     {
-        _mainInputs = new MainInputs();
-    }
-
-    private void OnEnable()
-    {
-        _mainInputs.Selector.Enable();
-        _mainInputs.Selector.Select.performed += Select;
-    }
-
-    private void OnDisable()
-    {
-        _mainInputs.Selector.Disable();
-        _mainInputs.Selector.Select.performed -= Select;
+        FPSController controller = transform.GetComponent<FPSController>();
+        if (controller) _fpsController = controller;
     }
 
     void Update()
@@ -58,14 +46,13 @@ public class Selection : MonoBehaviour
         }
     }
 
-    private void Select(InputAction.CallbackContext context)
+    public void Select()
     {
         RaycastHit _hit;
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out _hit))
-        {
-            if (!_hit.transform.CompareTag("Selectable")) return;
-        }
+        // TODO : Upgrade to be only the UI that return, not all not selectable elements
+        // TODO : Upgrade to catch the sky
+        if (Physics.Raycast(ray, out _hit) && !_hit.transform.CompareTag("Selectable")) return;
 
         if (!_highlight) return;
         if (_selection) _selection.GetComponent<MeshRenderer>().materials = _originalMaterialSelection;
@@ -83,10 +70,10 @@ public class Selection : MonoBehaviour
             renderer.materials = newMaterials;
 
             SelectableElement selectableElement = _selection.GetComponent<SelectableElement>();
-            if (selectableElement)
-            {
-                panelInfos.Open(selectableElement);
-            }
+            if (selectableElement) panelInfos.Open(selectableElement);
+            
+            InputsManager.instance.mainInputs.FPSController.Move.Disable();
+            _fpsController.lookSpeed = 2f;
             
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -110,10 +97,7 @@ public class Selection : MonoBehaviour
                 renderer.materials = newMaterials;
                 
                 SelectableElement selectableElement = obj.GetComponent<SelectableElement>();
-                if (selectableElement)
-                {
-                    textName.text = selectableElement.name;
-                }
+                if (selectableElement) textName.text = selectableElement.name;
             }
         }
     }

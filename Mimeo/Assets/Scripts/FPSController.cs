@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 public class FPSController : MonoBehaviour
@@ -11,15 +10,9 @@ public class FPSController : MonoBehaviour
     public float lookXLimit = 85f;
 
     private CharacterController _characterController;
-    private MainInputs _mainInputs;
     private Vector3 _moveDirection = Vector3.zero;
     private float _currentSpeed;
     private float _rotationX;
-
-    private void Awake()
-    {
-        _mainInputs = new MainInputs();
-    }
 
     void Start()
     {
@@ -27,20 +20,6 @@ public class FPSController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         _currentSpeed = moveSpeed;
-    }
-
-    private void OnEnable()
-    {
-        _mainInputs.FPSController.Enable();
-        _mainInputs.FPSController.Sprint.performed += Sprint;
-        _mainInputs.FPSController.Sprint.canceled += SprintCanceled;
-    }
-
-    private void OnDisable()
-    {
-        _mainInputs.FPSController.Disable();
-        _mainInputs.FPSController.Sprint.performed -= Sprint;
-        _mainInputs.FPSController.Sprint.canceled -= SprintCanceled;
     }
 
     void Update()
@@ -51,7 +30,7 @@ public class FPSController : MonoBehaviour
 
     private void HandleMovement()
     {
-        Vector3 inputVector = _mainInputs.FPSController.Move.ReadValue<Vector3>();
+        Vector3 inputVector = InputsManager.instance.mainInputs.FPSController.Move.ReadValue<Vector3>();
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
         Vector3 up = transform.TransformDirection(Vector3.up);
@@ -62,7 +41,7 @@ public class FPSController : MonoBehaviour
 
     private void HandleLook()
     {
-        Vector2 inputVector = _mainInputs.FPSController.Look.ReadValue<Vector2>();
+        Vector2 inputVector = InputsManager.instance.mainInputs.FPSController.Look.ReadValue<Vector2>();
 
         float mouseX = inputVector.x * lookSpeed * Time.deltaTime;
         float mouseY = inputVector.y * lookSpeed * Time.deltaTime;
@@ -74,13 +53,8 @@ public class FPSController : MonoBehaviour
         transform.Rotate(Vector3.up * mouseX);
     }
 
-    private void Sprint(InputAction.CallbackContext context)
+    public void Sprint(bool isSprinting)
     {
-        _currentSpeed = runSpeed;
-    }
-
-    private void SprintCanceled(InputAction.CallbackContext context)
-    {
-        _currentSpeed = moveSpeed;
+        _currentSpeed = isSprinting ? runSpeed : moveSpeed;
     }
 }
