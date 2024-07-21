@@ -53,6 +53,7 @@ public class Selector : MonoBehaviour
 
     public void Select()
     {
+        
         RaycastHit _hit;
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
         // TODO : Upgrade to be only the UI that return, not all not selectable elements
@@ -97,6 +98,7 @@ public class Selector : MonoBehaviour
         panelInfos.Close();
 
         _previousSelectedElement.materials = _originalMaterialSelection;
+        _selection = null;
         
         InputsManager.instance.mainInputs.FPSController.Move.Enable();
         _fpsController.lookSpeed = _oldLookSpeed;
@@ -135,6 +137,7 @@ public class Selector : MonoBehaviour
         if (!_isHighlighting) return;
         
         _previousHighlightedElement.materials = _originalMaterialHighlight;
+        _highlight = null;
         
         _isHighlighting = false;
     }
