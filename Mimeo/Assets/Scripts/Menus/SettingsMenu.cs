@@ -1,12 +1,21 @@
+using System;
 using UnityEngine;
 
 public class SettingsMenu : MonoBehaviour
 {
-    public GameObject mainMenu;
+    public MainMenu mainMenu;
+    public PauseMenu pauseMenu;
+
+    private void Start()
+    {
+        gameObject.SetActive(false);
+    }
 
     public void OnClickBtnReturn()
     {
         gameObject.SetActive(false);
-        mainMenu.SetActive(true);
+        
+        if (mainMenu) mainMenu.gameObject.SetActive(true);
+        if (pauseMenu) pauseMenu.gameObject.SetActive(true);
     }
 }

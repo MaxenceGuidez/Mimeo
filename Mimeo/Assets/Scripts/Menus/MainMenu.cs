@@ -3,11 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject settingsMenu;
+    public SettingsMenu settingsMenu;
 
     private void Start()
     {
-        settingsMenu.SetActive(false);
+        settingsMenu.gameObject.SetActive(false);
     }
 
     public void OnClickBtnVisit()
@@ -18,7 +18,7 @@ public class MainMenu : MonoBehaviour
     public void OnClickBtnSettings()
     {
         gameObject.SetActive(false);
-        settingsMenu.SetActive(true);
+        settingsMenu.gameObject.SetActive(true);
     }
     
     public void OnClickBtnQuit()
