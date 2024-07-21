@@ -115,41 +115,10 @@ public class PanelInfos : MonoBehaviour
     
     void UpdateMaterial()
     {
-        Material selectedColorMaterial = null;
-        Material selectedTextureMaterial = null;
-        Material[] selectedColorMaterials = {};
-        Material[] selectedTextureMaterials = {};
-        
-        if (dropdownColor.value == 0) selectedColorMaterials = _selectedElement.GetOriginalMaterials();
-        else selectedColorMaterial = colorMaterials[dropdownColor.value - 1];
-        
-        if (dropdownTexture.value == 0) selectedTextureMaterials = _selectedElement.GetOriginalMaterials();
-        else selectedTextureMaterial = textureMaterials[dropdownTexture.value - 1];
+        if (dropdownColor.value == 0) _selectedElement.SetColor(null);
+        else _selectedElement.SetColor(colorMaterials[dropdownColor.value - 1]);
 
-        if (selectedColorMaterial && selectedTextureMaterial)
-        {
-            Material combinedMaterial = new Material(Shader.Find("Standard"));
-            combinedMaterial.color = selectedColorMaterial.color;
-            combinedMaterial.mainTexture = selectedTextureMaterial.mainTexture;
-
-            _selectedElement.SetMaterial(combinedMaterial);
-        }
-        else if (selectedColorMaterials.Length > 0 && selectedTextureMaterials.Length > 0)
-        {
-            Material[] originalMaterials = _selectedElement.GetOriginalMaterials();
-            Material[] combinedMaterials = new Material[originalMaterials.Length];
-            for (int i = 0; i < originalMaterials.Length; i++)
-            {
-                combinedMaterials[i] = new Material(Shader.Find("Standard"));
-                combinedMaterials[i].color = selectedColorMaterials[i].color;
-                combinedMaterials[i].mainTexture = selectedTextureMaterials[i].mainTexture;
-            }
-
-            _selectedElement.SetMaterials(combinedMaterials);
-        }
-        else
-        {
-            
-        }
+        if (dropdownTexture.value == 0) _selectedElement.SetTexture(null);
+        else _selectedElement.SetTexture(textureMaterials[dropdownTexture.value - 1]);
     }
 }

@@ -13,28 +13,23 @@ public class SelectableElement : MonoBehaviour
         _originalMaterials = _renderer.materials;
     }
 
-    public Material[] GetOriginalMaterials()
+    public void SetColor(Material materialColor)
     {
-        return _originalMaterials;
-    }
-
-    public void SetMaterials(Material[] newMaterials)
-    {
-        _renderer.materials = newMaterials;
-    }
-
-    public void SetMaterial(Material newMaterial)
-    {
-        Material[] newMaterials = new Material[_renderer.materials.Length];
+        Material[] newMaterials = _renderer.materials;
         for (int i = 0; i < newMaterials.Length; i++)
         {
-            newMaterials[i] = newMaterial;
+            newMaterials[i].color = materialColor == null ? _originalMaterials[i].color : materialColor.color;
         }
         _renderer.materials = newMaterials;
     }
 
-    public void ResetMaterial()
+    public void SetTexture(Material materialTexture)
     {
-        _renderer.materials = _originalMaterials;
+        Material[] newMaterials = _renderer.materials;
+        for (int i = 0; i < newMaterials.Length; i++)
+        {
+            newMaterials[i].mainTexture = materialTexture == null ? _originalMaterials[i].mainTexture : materialTexture.mainTexture;
+        }
+        _renderer.materials = newMaterials;
     }
 }
