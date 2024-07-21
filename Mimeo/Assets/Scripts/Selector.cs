@@ -78,6 +78,9 @@ public class Selection : MonoBehaviour
                 _selection.GetComponent<MeshRenderer>().materials = newMaterials;
 
                 panelInfos.Open();
+                
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             }
             _highlight = null;
         }
