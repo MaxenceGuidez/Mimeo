@@ -15,7 +15,8 @@ public class PanelInfos : MonoBehaviour
     private Vector3 _closedPosition;
     private Vector3 _openPosition;
     private bool _isAnimating;
-
+    public bool IsAnimating { get { return _isAnimating; } }
+    
     void Start()
     {
         _closedPosition = transform.localPosition;

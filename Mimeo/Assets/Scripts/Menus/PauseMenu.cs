@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -6,7 +7,9 @@ public class PauseMenu : MonoBehaviour
 {
     public SettingsMenu settingsMenu;
     public GameObject crosshair;
-    
+    public PanelInfos panelInfos;
+    public Selector selector;
+
     private void Start()
     {
         gameObject.SetActive(false);
@@ -14,13 +17,24 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause(bool goToSettings = false)
     {
-        Time.timeScale = 0;
-        
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         EventSystem.current.SetSelectedGameObject(null);
+
+        selector.Unselect();
         
         gameObject.SetActive(!goToSettings);
+        StartCoroutine(PauseAfterAnimation(goToSettings));
+    }
+
+    private IEnumerator PauseAfterAnimation(bool goToSettings)
+    {
+        while (panelInfos.IsAnimating)
+        {
+            yield return null;
+        }
+        Time.timeScale = 0;
+
         settingsMenu.gameObject.SetActive(goToSettings);
         crosshair.SetActive(false);
     }

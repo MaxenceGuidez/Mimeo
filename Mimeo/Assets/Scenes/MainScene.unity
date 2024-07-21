@@ -626,6 +626,10 @@ PrefabInstance:
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 3042452391161838159}
+    - target: {fileID: 3411071110103278290, guid: eeb64f8c9856f61439e92cfb73892a26, type: 3}
+      propertyPath: m_enableWordWrapping
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5779642866133082507, guid: eeb64f8c9856f61439e92cfb73892a26, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -810,6 +814,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settingsMenu: {fileID: 3042452391161838155}
   crosshair: {fileID: 3042452391161838156}
+  panelInfos: {fileID: 7228593142500542343}
 --- !u!1001 &3350696797158607745
 PrefabInstance:
   m_ObjectHideFlags: 0
