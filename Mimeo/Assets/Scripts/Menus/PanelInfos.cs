@@ -18,13 +18,11 @@ public class PanelInfos : MonoBehaviour
     private Vector3 _closedPosition;
     private Vector3 _openPosition;
     private bool _isAnimating;
-    private Material _combinedMaterial;
     
     void Start()
     {
         _closedPosition = transform.localPosition;
         _openPosition = _closedPosition - new Vector3(0, 650, 0);
-        _combinedMaterial = new Material(Shader.Find("Standard"));
         
         PopulateDropdowns();
 
@@ -117,20 +115,41 @@ public class PanelInfos : MonoBehaviour
     
     void UpdateMaterial()
     {
-        if (dropdownColor.value == 0) return;
-        if (dropdownTexture.value == 0) return;
+        Material selectedColorMaterial = null;
+        Material selectedTextureMaterial = null;
+        Material[] selectedColorMaterials = {};
+        Material[] selectedTextureMaterials = {};
         
-        if (dropdownColor.value == 0 && dropdownTexture.value == 0)
+        if (dropdownColor.value == 0) selectedColorMaterials = _selectedElement.GetOriginalMaterials();
+        else selectedColorMaterial = colorMaterials[dropdownColor.value - 1];
+        
+        if (dropdownTexture.value == 0) selectedTextureMaterials = _selectedElement.GetOriginalMaterials();
+        else selectedTextureMaterial = textureMaterials[dropdownTexture.value - 1];
+
+        if (selectedColorMaterial && selectedTextureMaterial)
         {
-            _selectedElement.ResetMaterial();
+            Material combinedMaterial = new Material(Shader.Find("Standard"));
+            combinedMaterial.color = selectedColorMaterial.color;
+            combinedMaterial.mainTexture = selectedTextureMaterial.mainTexture;
+
+            _selectedElement.SetMaterial(combinedMaterial);
         }
-        
-        Material selectedColorMaterial = colorMaterials[dropdownColor.value - 1];
-        Material selectedTextureMaterial = textureMaterials[dropdownTexture.value - 1];
+        else if (selectedColorMaterials.Length > 0 && selectedTextureMaterials.Length > 0)
+        {
+            Material[] originalMaterials = _selectedElement.GetOriginalMaterials();
+            Material[] combinedMaterials = new Material[originalMaterials.Length];
+            for (int i = 0; i < originalMaterials.Length; i++)
+            {
+                combinedMaterials[i] = new Material(Shader.Find("Standard"));
+                combinedMaterials[i].color = selectedColorMaterials[i].color;
+                combinedMaterials[i].mainTexture = selectedTextureMaterials[i].mainTexture;
+            }
 
-        _combinedMaterial.color = selectedColorMaterial.color;
-        _combinedMaterial.mainTexture = selectedTextureMaterial.mainTexture;
-
-        _selectedElement.SetMaterial(_combinedMaterial);
+            _selectedElement.SetMaterials(combinedMaterials);
+        }
+        else
+        {
+            
+        }
     }
 }

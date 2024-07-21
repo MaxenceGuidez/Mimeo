@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class SelectableElement : MonoBehaviour
@@ -12,6 +11,16 @@ public class SelectableElement : MonoBehaviour
     {
         _renderer = GetComponent<MeshRenderer>();
         _originalMaterials = _renderer.materials;
+    }
+
+    public Material[] GetOriginalMaterials()
+    {
+        return _originalMaterials;
+    }
+
+    public void SetMaterials(Material[] newMaterials)
+    {
+        _renderer.materials = newMaterials;
     }
 
     public void SetMaterial(Material newMaterial)
