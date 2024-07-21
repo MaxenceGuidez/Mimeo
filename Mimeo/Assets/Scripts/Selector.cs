@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Selector : MonoBehaviour
 {
@@ -53,13 +55,7 @@ public class Selector : MonoBehaviour
 
     public void Select()
     {
-        
-        RaycastHit _hit;
-        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-        // TODO : Upgrade to be only the UI that return, not all not selectable elements
-        // TODO : Upgrade to catch the sky
-        if (Physics.Raycast(ray, out _hit) && !_hit.transform.CompareTag("Selectable")) return;
-
+        if (IsPointerOverUIElement()) return;
         if (!_highlight) return;
         if (_selection) _selection.GetComponent<MeshRenderer>().materials = _originalMaterialSelection;
             
@@ -140,5 +136,26 @@ public class Selector : MonoBehaviour
         _highlight = null;
         
         _isHighlighting = false;
+    }
+    
+    private bool IsPointerOverUIElement()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current)
+        {
+            position = new Vector2(Input.mousePosition.x, Input.mousePosition.y)
+        };
+        
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        
+        foreach (RaycastResult result in results)
+        {
+            if (result.gameObject.name != "Crosshair")
+            {
+                return true;
+            }
+        }
+        
+        return false;
     }
 }
