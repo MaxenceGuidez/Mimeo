@@ -5,8 +5,8 @@ using UnityEngine;
 public class PanelInfos : MonoBehaviour
 {
     public GameObject lineNameDisplay;
-    public TMP_InputField TextFieldName;
-    public TMP_InputField TextFieldDescription;
+    public TMP_InputField textFieldName;
+    public TMP_InputField textFieldDescription;
     public TMP_Dropdown dropdownColor;
     public TMP_Dropdown dropdownTexture;
     public float animationDuration = .2f;
@@ -20,6 +20,9 @@ public class PanelInfos : MonoBehaviour
     {
         _closedPosition = transform.localPosition;
         _openPosition = _closedPosition - new Vector3(0, 650, 0);
+
+        textFieldName.onValueChanged.AddListener(delegate {OnNameChange(); });
+        textFieldDescription.onValueChanged.AddListener(delegate {OnDescriptionChange(); });
     }
 
     public void Open(SelectableElement selected)
@@ -27,8 +30,8 @@ public class PanelInfos : MonoBehaviour
         if (!selected) return;
         _selectedElement = selected;
 
-        TextFieldName.text = _selectedElement.name;
-        TextFieldDescription.text = _selectedElement.description;
+        textFieldName.text = _selectedElement.name;
+        textFieldDescription.text = _selectedElement.description;
         
         if (!_isAnimating)
         {
@@ -61,5 +64,15 @@ public class PanelInfos : MonoBehaviour
 
         UIElement.localPosition = targetPosition;
         _isAnimating = false;
+    }
+
+    void OnNameChange()
+    {
+        _selectedElement.name = textFieldName.text;
+    }
+
+    void OnDescriptionChange()
+    {
+        _selectedElement.description = textFieldDescription.text;
     }
 }
