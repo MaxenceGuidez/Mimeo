@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 0}
-  pauseMenu: {fileID: 0}
+  pauseMenu: {fileID: 408942897683357772}
 --- !u!1 &547557026159899623
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,7 +429,7 @@ MonoBehaviour:
   m_InputType: 0
   m_AsteriskChar: 42
   m_KeyboardType: 0
-  m_LineType: 0
+  m_LineType: 2
   m_HideMobileInput: 0
   m_HideSoftKeyboard: 0
   m_CharacterValidation: 0
@@ -473,7 +473,7 @@ MonoBehaviour:
   m_ResetOnDeActivation: 1
   m_RestoreOriginalTextOnEscape: 1
   m_isRichTextEditingAllowed: 0
-  m_LineLimit: 0
+  m_LineLimit: 10
   m_InputValidator: {fileID: 0}
 --- !u!1 &786777200100730384
 GameObject:
@@ -596,9 +596,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: OnClickBtnVisit
+      - m_Target: {fileID: 408942897683357772}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: OnClickBtnQuit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -977,9 +977,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: OnClickBtnVisit
+      - m_Target: {fileID: 408942897683357772}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: OnClickBtnSettings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1223,7 +1223,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -1662,9 +1662,9 @@ MonoBehaviour:
     m_Options:
     - m_Text: Option A
       m_Image: {fileID: 0}
-    - m_Text: Option B
+    - m_Text: Option A
       m_Image: {fileID: 0}
-    - m_Text: Option C
+    - m_Text: Option A
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2797,6 +2797,7 @@ GameObject:
   - component: {fileID: 3612134293297731217}
   - component: {fileID: 1735321872608023904}
   - component: {fileID: 4492778205537903805}
+  - component: {fileID: 408942897683357772}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -2865,6 +2866,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &408942897683357772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3849033203028397664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd794e7af8cae724c92ede6245134752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settingsMenu: {fileID: 2894596896720322545}
+  crosshair: {fileID: 2625982025120279832}
+  panelInfos: {fileID: 4194015951845159390}
+  selector: {fileID: 0}
 --- !u!1 &3875660814906376444
 GameObject:
   m_ObjectHideFlags: 0
@@ -3859,9 +3876,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: OnClickBtnVisit
+      - m_Target: {fileID: 408942897683357772}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: OnClickBtnMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3883,7 +3900,6 @@ GameObject:
   - component: {fileID: 8975115219455676608}
   - component: {fileID: 3442287842879048608}
   - component: {fileID: 1579902382488436533}
-  - component: {fileID: 4417333267271499152}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3977,21 +3993,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &4417333267271499152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5883515213573086256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd794e7af8cae724c92ede6245134752, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 3849033203028397664}
-  settingsMenu: {fileID: 2894596896720322545}
-  crosshair: {fileID: 2625982025120279832}
 --- !u!1 &5935613454869667543
 GameObject:
   m_ObjectHideFlags: 0
@@ -4028,7 +4029,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 59}
   m_SizeDelta: {x: 500, y: 120}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &5884843990908533034
@@ -4113,9 +4114,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: OnClickBtnVisit
+      - m_Target: {fileID: 2894596896720322545}
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+        m_MethodName: OnClickBtnReturn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4246,9 +4247,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: OnClickBtnVisit
+      - m_Target: {fileID: 408942897683357772}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: OnClickBtnResume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
