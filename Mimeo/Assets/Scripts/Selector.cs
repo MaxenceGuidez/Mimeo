@@ -78,7 +78,9 @@ public class Selector : MonoBehaviour
             if (selectableElement) panelInfos.Open(selectableElement);
             
             InputsManager.instance.mainInputs.FPSController.Move.Disable();
-            _oldLookSpeed = _fpsController.lookSpeed;
+
+            float actualLookSpeed = _fpsController.lookSpeed;
+            if (!Mathf.Approximately(actualLookSpeed, 2f)) _oldLookSpeed = actualLookSpeed;
             _fpsController.lookSpeed = 2f;
             
             Cursor.lockState = CursorLockMode.None;
