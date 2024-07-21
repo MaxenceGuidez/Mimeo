@@ -96,7 +96,14 @@ public class Selector : MonoBehaviour
         
         panelInfos.Close();
 
-        _previousSelectedElement.materials = _originalMaterialSelection;
+        bool isPreviousSelectedElementMaterialChanged = false;
+        foreach (Material material in _previousSelectedElement.materials)
+        {
+            if (material != selectionMaterial) isPreviousSelectedElementMaterialChanged = true;
+        }
+        
+        if (!isPreviousSelectedElementMaterialChanged) _previousSelectedElement.materials = _originalMaterialSelection;
+        
         _selection = null;
         
         InputsManager.instance.mainInputs.FPSController.Move.Enable();
