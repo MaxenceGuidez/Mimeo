@@ -17,4 +17,9 @@ public class SettingsMenu : MonoBehaviour
         if (mainMenu) mainMenu.gameObject.SetActive(true);
         if (pauseMenu) pauseMenu.gameObject.SetActive(true);
     }
+
+    public void OnHoverBtn()
+    {
+        AudioManager.instance.ButtonHover();
+    }
 }

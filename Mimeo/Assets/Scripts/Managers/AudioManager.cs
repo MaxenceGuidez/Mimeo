@@ -4,6 +4,7 @@ using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
     public AudioClip[] playlist;
+    public AudioClip buttonHoverSound;
     public AudioSource audioSource;
     public AudioMixerGroup sfxMixer;
     
@@ -47,5 +48,10 @@ public class AudioManager : MonoBehaviour
         audioSource.Play();
         Destroy(tempGo, clip.length);
         return audioSource;
+    }
+
+    public void ButtonHover()
+    {
+        PlayClipAt(buttonHoverSound, new Vector3());
     }
 }

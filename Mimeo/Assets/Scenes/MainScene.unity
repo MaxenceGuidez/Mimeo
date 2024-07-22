@@ -133,17 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00c8f0aedc139364ab90daeae7161694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &458840872 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6908009406986409969, guid: d76f3a088858e7b46b5956ba1a10210a, type: 3}
-  m_PrefabInstance: {fileID: 554771546146986077}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94561c319cf4616408da56c1951ec523, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &496465114
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,6 +166,40 @@ Transform:
   - {fileID: 9082343065714640533}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &533825357 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5935613454869667543, guid: eeb64f8c9856f61439e92cfb73892a26, type: 3}
+  m_PrefabInstance: {fileID: 3042452391161838154}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &533825358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533825357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1361809068}
+          m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+          m_MethodName: OnHoverBtn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &545378070 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2637201562449044999, guid: ae5da690753ad6f4191a571ed92fb101, type: 3}
@@ -386,9 +409,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a28b5a5c18fb9243b09abb81d9c59ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fpsController: {fileID: 458840872}
-  selector: {fileID: 458840871}
   pauseMenu: {fileID: 3042452391161838159}
+--- !u!114 &1361809068 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2894596896720322545, guid: eeb64f8c9856f61439e92cfb73892a26, type: 3}
+  m_PrefabInstance: {fileID: 3042452391161838154}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd7d83cf5b9852b489bc24c5f80b050f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1390313573
 GameObject:
   m_ObjectHideFlags: 0
@@ -771,8 +803,43 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6035271815705114608, guid: eeb64f8c9856f61439e92cfb73892a26, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3042452391161838163}
+    - targetCorrespondingSourceObject: {fileID: 1253976728233309739, guid: eeb64f8c9856f61439e92cfb73892a26, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3042452391161838162}
+    - targetCorrespondingSourceObject: {fileID: 5729508661078810103, guid: eeb64f8c9856f61439e92cfb73892a26, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3042452391161838161}
+    - targetCorrespondingSourceObject: {fileID: 786777200100730384, guid: eeb64f8c9856f61439e92cfb73892a26, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3042452391161838160}
+    - targetCorrespondingSourceObject: {fileID: 5935613454869667543, guid: eeb64f8c9856f61439e92cfb73892a26, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 533825358}
   m_SourcePrefab: {fileID: 100100000, guid: eeb64f8c9856f61439e92cfb73892a26, type: 3}
+--- !u!1 &3042452391161838155 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 786777200100730384, guid: eeb64f8c9856f61439e92cfb73892a26, type: 3}
+  m_PrefabInstance: {fileID: 3042452391161838154}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3042452391161838156 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5729508661078810103, guid: eeb64f8c9856f61439e92cfb73892a26, type: 3}
+  m_PrefabInstance: {fileID: 3042452391161838154}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3042452391161838157 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1253976728233309739, guid: eeb64f8c9856f61439e92cfb73892a26, type: 3}
+  m_PrefabInstance: {fileID: 3042452391161838154}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3042452391161838158 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6035271815705114608, guid: eeb64f8c9856f61439e92cfb73892a26, type: 3}
+  m_PrefabInstance: {fileID: 3042452391161838154}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3042452391161838159 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 408942897683357772, guid: eeb64f8c9856f61439e92cfb73892a26, type: 3}
@@ -784,6 +851,122 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd794e7af8cae724c92ede6245134752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3042452391161838160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3042452391161838155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3042452391161838159}
+          m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+          m_MethodName: OnHoverBtn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &3042452391161838161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3042452391161838156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3042452391161838159}
+          m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+          m_MethodName: OnHoverBtn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &3042452391161838162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3042452391161838157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3042452391161838159}
+          m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+          m_MethodName: OnHoverBtn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &3042452391161838163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3042452391161838158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3042452391161838159}
+          m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+          m_MethodName: OnHoverBtn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &3350696797158607745
 PrefabInstance:
   m_ObjectHideFlags: 0
