@@ -166,6 +166,15 @@ public class Selector : MonoBehaviour
         _actualSelection = null;
         _isSelecting = false;
     }
+
+    public void UpdateOriginalMaterial()
+    {
+        MeshRenderer actualSelectionRenderer = _actualSelection.GetComponent<MeshRenderer>();
+        if (actualSelectionRenderer)
+        {
+            _originalSelectionMaterials = actualSelectionRenderer.materials;
+        }
+    }
     
     private bool IsPointerOverUIElement()
     {

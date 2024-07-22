@@ -129,6 +129,8 @@ public class PanelInfos : MonoBehaviour
 
         if (dropdownTexture.value == 0) _selectedElement.SetTexture(null);
         else _selectedElement.SetTexture(textureMaterials[dropdownTexture.value - 1]);
+        
+        Selector.instance.UpdateOriginalMaterial();
     }
     
     int GetIndexOfColor(Color colorToFind)
