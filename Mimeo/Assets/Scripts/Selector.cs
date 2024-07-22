@@ -155,6 +155,8 @@ public class Selector : MonoBehaviour
         
         if (!isPreviousSelectedElementMaterialChanged) _previousSelectedRenderer.materials = _originalMaterialsSelection;
         
+        MeshRenderer selectRenderer = _selection.GetComponent<MeshRenderer>();
+        selectRenderer.materials = _originalMaterialsSelection;
         _selection = null;
         
         InputsManager.instance.mainInputs.FPSController.Move.Enable();
