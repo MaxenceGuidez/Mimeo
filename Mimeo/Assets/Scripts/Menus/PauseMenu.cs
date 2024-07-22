@@ -20,7 +20,7 @@ public class PauseMenu : MonoBehaviour
 
         panelInfos.CloseDirectly();
         Selector.instance.Unselect();
-        Selector.instance.UnhighlightObject();
+        Selector.instance.Unhighlight();
         
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

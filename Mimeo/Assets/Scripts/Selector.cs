@@ -14,13 +14,13 @@ public class Selector : MonoBehaviour
     public AudioClip soundSelect;
     public AudioClip soundUnselect;
 
-    private Material[] _originalMaterialHighlight;
-    private Material[] _originalMaterialSelection;
+    private Material[] _originalMaterialsHighlight;
+    private Material[] _originalMaterialsSelection;
     private Transform _highlight;
     private Transform _selection;
     private RaycastHit _raycastHit;
-    private MeshRenderer _previousSelectedElement;
-    private MeshRenderer _previousHighlightedElement;
+    private MeshRenderer _previousSelectedRenderer;
+    private MeshRenderer _previousHighlightedRenderer;
     private float _oldLookSpeed;
     private bool _isSelecting;
     private bool _isHighlighting;
@@ -37,7 +37,7 @@ public class Selector : MonoBehaviour
     {
         if (_highlight)
         {
-            _highlight.GetComponent<MeshRenderer>().materials = _originalMaterialHighlight;
+            _highlight.GetComponent<MeshRenderer>().materials = _originalMaterialsHighlight;
             _highlight = null;
         }
         
@@ -47,7 +47,7 @@ public class Selector : MonoBehaviour
             _highlight = _raycastHit.transform;
             if (_highlight.CompareTag("Selectable") && _highlight != _selection)
             {
-                HighlightObject(_highlight);
+                Highlight();
             }
             else
             {
@@ -57,11 +57,54 @@ public class Selector : MonoBehaviour
         }
     }
 
+    private void Highlight()
+    {
+        MeshRenderer renderer = _highlight.GetComponent<MeshRenderer>();
+        if (renderer)
+        {
+            if (renderer.material != highlightMaterial)
+            {
+                _isHighlighting = true;
+
+                if (!_previousHighlightedRenderer)
+                {
+                    if (AudioManager.instance) AudioManager.instance.PlayClipAt(soundHighlight, transform.position);
+                }
+                else if (_highlight != _previousHighlightedRenderer.transform)
+                {
+                    if (AudioManager.instance) AudioManager.instance.PlayClipAt(soundHighlight, transform.position);
+                }
+                
+                _previousHighlightedRenderer = renderer;
+                _originalMaterialsHighlight = renderer.materials;
+                Material[] newMaterials = new Material[renderer.materials.Length];
+                for (int i = 0; i < newMaterials.Length; i++)
+                {
+                    newMaterials[i] = highlightMaterial;
+                }
+                renderer.materials = newMaterials;
+                
+                SelectableElement selectableElement = _highlight.GetComponent<SelectableElement>();
+                if (selectableElement) textName.text = selectableElement.name;
+            }
+        }
+    }
+
+    public void Unhighlight()
+    {
+        if (!_isHighlighting) return;
+        
+        _previousHighlightedRenderer.materials = _originalMaterialsHighlight;
+        _highlight = null;
+        
+        _isHighlighting = false;
+    }
+    
     public void Select()
     {
         if (IsPointerOverUIElement()) return;
         if (!_highlight) return;
-        if (_selection) _selection.GetComponent<MeshRenderer>().materials = _originalMaterialSelection;
+        if (_selection) _selection.GetComponent<MeshRenderer>().materials = _originalMaterialsSelection;
             
         _selection = _raycastHit.transform;
         MeshRenderer renderer = _selection.GetComponent<MeshRenderer>();
@@ -73,8 +116,8 @@ public class Selector : MonoBehaviour
             SelectableElement selectableElement = _selection.GetComponent<SelectableElement>();
             if (selectableElement) panelInfos.Open(selectableElement);
             
-            _previousSelectedElement = renderer;
-            _originalMaterialSelection = _originalMaterialHighlight;
+            _previousSelectedRenderer = renderer;
+            _originalMaterialsSelection = _originalMaterialsHighlight;
             Material[] newMaterials = new Material[renderer.materials.Length];
             for (int i = 0; i < newMaterials.Length; i++)
             {
@@ -103,12 +146,12 @@ public class Selector : MonoBehaviour
         panelInfos.Close();
 
         bool isPreviousSelectedElementMaterialChanged = false;
-        foreach (Material material in _previousSelectedElement.materials)
+        foreach (Material material in _previousSelectedRenderer.materials)
         {
             if (material != selectionMaterial) isPreviousSelectedElementMaterialChanged = true;
         }
         
-        if (!isPreviousSelectedElementMaterialChanged) _previousSelectedElement.materials = _originalMaterialSelection;
+        if (!isPreviousSelectedElementMaterialChanged) _previousSelectedRenderer.materials = _originalMaterialsSelection;
         
         _selection = null;
         
@@ -119,49 +162,6 @@ public class Selector : MonoBehaviour
         Cursor.visible = false;
         
         _isSelecting = false;
-    }
-
-    private void HighlightObject(Transform obj)
-    {
-        MeshRenderer renderer = obj.GetComponent<MeshRenderer>();
-        if (renderer)
-        {
-            if (renderer.material != highlightMaterial)
-            {
-                _isHighlighting = true;
-
-                if (!_previousHighlightedElement)
-                {
-                    if (AudioManager.instance) AudioManager.instance.PlayClipAt(soundHighlight, transform.position);
-                }
-                else if (_highlight != _previousHighlightedElement.transform)
-                {
-                    if (AudioManager.instance) AudioManager.instance.PlayClipAt(soundHighlight, transform.position);
-                }
-                
-                _previousHighlightedElement = renderer;
-                _originalMaterialHighlight = renderer.materials;
-                Material[] newMaterials = new Material[renderer.materials.Length];
-                for (int i = 0; i < newMaterials.Length; i++)
-                {
-                    newMaterials[i] = highlightMaterial;
-                }
-                renderer.materials = newMaterials;
-                
-                SelectableElement selectableElement = obj.GetComponent<SelectableElement>();
-                if (selectableElement) textName.text = selectableElement.name;
-            }
-        }
-    }
-
-    public void UnhighlightObject()
-    {
-        if (!_isHighlighting) return;
-        
-        _previousHighlightedElement.materials = _originalMaterialHighlight;
-        _highlight = null;
-        
-        _isHighlighting = false;
     }
     
     private bool IsPointerOverUIElement()
