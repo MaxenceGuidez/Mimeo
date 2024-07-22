@@ -68,15 +68,17 @@ public class Selector : MonoBehaviour
 
                 if (!_previousHighlightedRenderer)
                 {
+                    _previousHighlightedRenderer = renderer;
+                    _originalMaterialsHighlight = renderer.materials;
                     if (AudioManager.instance) AudioManager.instance.PlayClipAt(soundHighlight, transform.position);
                 }
                 else if (_highlight != _previousHighlightedRenderer.transform)
                 {
+                    _previousHighlightedRenderer = renderer;
+                    _originalMaterialsHighlight = renderer.materials;
                     if (AudioManager.instance) AudioManager.instance.PlayClipAt(soundHighlight, transform.position);
                 }
                 
-                _previousHighlightedRenderer = renderer;
-                _originalMaterialsHighlight = renderer.materials;
                 Material[] newMaterials = new Material[renderer.materials.Length];
                 for (int i = 0; i < newMaterials.Length; i++)
                 {
