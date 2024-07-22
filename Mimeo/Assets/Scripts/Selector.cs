@@ -50,8 +50,8 @@ public class Selector : MonoBehaviour
     {
         _isHighlighting = true;
 
-        if (_actualHighlight.state != SelectableElement.SelectableElementState.UNUSED) return;
-        _actualHighlight.state = SelectableElement.SelectableElementState.HIGHLIGHTED;
+        if (_actualHighlight.state != SelectableElement.SelectableState.UNUSED) return;
+        _actualHighlight.state = SelectableElement.SelectableState.HIGHLIGHTED;
         
         MeshRenderer highlightRenderer = _actualHighlight.GetComponent<MeshRenderer>();
         if (highlightRenderer) _originalHighlightMaterials = highlightRenderer.materials;
@@ -76,7 +76,7 @@ public class Selector : MonoBehaviour
     {
         if (!_isHighlighting) return;
         
-        _actualHighlight.state = SelectableElement.SelectableElementState.UNUSED;
+        _actualHighlight.state = SelectableElement.SelectableState.UNUSED;
         
         MeshRenderer actualHighlightRenderer = _actualHighlight.GetComponent<MeshRenderer>();
         if (actualHighlightRenderer)
@@ -113,14 +113,14 @@ public class Selector : MonoBehaviour
         if (!_actualSelection) return;
 
         
-        if (_actualSelection.state == SelectableElement.SelectableElementState.SELECTED) return;
-        if (_actualSelection.state == SelectableElement.SelectableElementState.HIGHLIGHTED)
+        if (_actualSelection.state == SelectableElement.SelectableState.SELECTED) return;
+        if (_actualSelection.state == SelectableElement.SelectableState.HIGHLIGHTED)
         {
             _originalSelectionMaterials = _originalHighlightMaterials;
             if (AudioManager.instance) AudioManager.instance.PlayClipAt(soundSelect, transform.position);
         }
 
-        _actualSelection.state = SelectableElement.SelectableElementState.SELECTED;
+        _actualSelection.state = SelectableElement.SelectableState.SELECTED;
 
         MeshRenderer actualSelectionRenderer = _actualSelection.GetComponent<MeshRenderer>();
         if (actualSelectionRenderer)
@@ -143,7 +143,7 @@ public class Selector : MonoBehaviour
     {
         if (!_isSelecting) return;
         
-        _actualSelection.state = SelectableElement.SelectableElementState.UNUSED;
+        _actualSelection.state = SelectableElement.SelectableState.UNUSED;
         
         if (AudioManager.instance) AudioManager.instance.PlayClipAt(soundUnselect, transform.position);
         
