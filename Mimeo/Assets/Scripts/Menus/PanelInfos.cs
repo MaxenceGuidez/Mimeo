@@ -52,11 +52,8 @@ public class PanelInfos : MonoBehaviour
         dropdownColor.value = GetIndexOfColor(selectedRenderer.material.color);
         dropdownTexture.value = GetIndexOfTexture(selectedRenderer.material.mainTexture);
         
-        if (!_isAnimating)
-        {
-            StartCoroutine(TranslateUIElementTo(transform, _openPosition));
-            lineNameDisplay.SetActive(false);
-        }
+        StartCoroutine(TranslateUIElementTo(transform, _openPosition));
+        lineNameDisplay.SetActive(false);
     }
 
     public void Close()

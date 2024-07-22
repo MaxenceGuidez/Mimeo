@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class SelectableElement : MonoBehaviour
 {
@@ -6,16 +7,23 @@ public class SelectableElement : MonoBehaviour
 
     private MeshRenderer _renderer;
     private Material[] _originalMaterials;
-    
-    [HideInInspector]
-    public bool isHighlighted { get; set; }
-    [HideInInspector]
-    public bool isSelected { get; set; }
+    public SelectableElementState state;
+
+    public enum SelectableElementState
+    {
+        HIGHLIGHTED,
+        SELECTED,
+        UNUSED
+    }
 
     private void Start()
     {
+        gameObject.tag = "Selectable";
+        
         _renderer = GetComponent<MeshRenderer>();
         _originalMaterials = _renderer.materials;
+
+        state = SelectableElementState.UNUSED;
     }
 
     public void SetColor(Material materialColor)

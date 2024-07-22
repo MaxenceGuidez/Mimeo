@@ -533,6 +533,7 @@ MonoBehaviour:
   textName: {fileID: 2942447376543378377}
   soundHighlight: {fileID: 8300000, guid: 480fa7f77544f0e40a131de6e27f9ec1, type: 3}
   soundSelect: {fileID: 8300000, guid: f9342ec150603854eac48d1551d2e032, type: 3}
+  soundUnselect: {fileID: 8300000, guid: 32486c85ced6a854c89d32c08a60b425, type: 3}
 --- !u!1 &1867552707
 GameObject:
   m_ObjectHideFlags: 0

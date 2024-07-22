@@ -15,8 +15,8 @@ public class Selector : MonoBehaviour
     
     private SelectableElement _actualHighlight;
     private SelectableElement _actualSelection;
-    private SelectableElement _originalHighlight;
-    private SelectableElement _originalSelection;
+    private Material[] _originalHighlightMaterials;
+    private Material[] _originalSelectionMaterials;
     private RaycastHit _raycastHit;
     private bool _isHighlighting;
     private bool _isSelecting;
@@ -31,38 +31,32 @@ public class Selector : MonoBehaviour
 
     void Update()
     {
+        if (_actualHighlight) Unhighlight();
+        
         Vector2 middleScreen = new Vector2(Screen.width / 2, Screen.height / 2);
         Ray ray = playerCamera.ScreenPointToRay(middleScreen);
         if (Physics.Raycast(ray, out _raycastHit))
         {
             SelectableElement selectableElementTouched = _raycastHit.transform.GetComponent<SelectableElement>();
-            if (selectableElementTouched) {
-                _actualHighlight = selectableElementTouched;
-                
-                if (_actualHighlight.CompareTag("Selectable") && _actualHighlight != _actualSelection)
-                {
-                    Highlight();
-                }
-                else
-                {
-                    Unhighlight();
-                }
-            }
+            if (!selectableElementTouched) return;
+            
+            _actualHighlight = selectableElementTouched;
+            
+            if (_actualHighlight.CompareTag("Selectable") && _actualHighlight != _actualSelection) Highlight();
         }
     }
 
     private void Highlight()
     {
-        bool isAlreadyHighlighted = _actualHighlight.isHighlighted;
-        bool isAlreadySelected = _actualHighlight.isSelected;
-        if (!isAlreadyHighlighted && !isAlreadySelected)
-        {
-            _originalHighlight = _actualHighlight;
-            if (AudioManager.instance) AudioManager.instance.PlayClipAt(soundHighlight, transform.position);
-        }
-
         _isHighlighting = true;
-        _actualHighlight.isHighlighted = true;
+
+        if (_actualHighlight.state != SelectableElement.SelectableElementState.UNUSED) return;
+        _actualHighlight.state = SelectableElement.SelectableElementState.HIGHLIGHTED;
+        
+        MeshRenderer highlightRenderer = _actualHighlight.GetComponent<MeshRenderer>();
+        if (highlightRenderer) _originalHighlightMaterials = highlightRenderer.materials;
+        
+        if (AudioManager.instance) AudioManager.instance.PlayClipAt(soundHighlight, transform.position);
         
         MeshRenderer actualHighlightRenderer = _actualHighlight.GetComponent<MeshRenderer>();
         if (actualHighlightRenderer)
@@ -82,16 +76,15 @@ public class Selector : MonoBehaviour
     {
         if (!_isHighlighting) return;
         
-        _actualHighlight.isHighlighted = false;
+        _actualHighlight.state = SelectableElement.SelectableElementState.UNUSED;
         
         MeshRenderer actualHighlightRenderer = _actualHighlight.GetComponent<MeshRenderer>();
-        MeshRenderer originalHighlightRenderer = _originalHighlight.GetComponent<MeshRenderer>();
-        if (actualHighlightRenderer && originalHighlightRenderer)
+        if (actualHighlightRenderer)
         {
-            Material[] originalMaterials = new Material[originalHighlightRenderer.materials.Length];
+            Material[] originalMaterials = new Material[_originalHighlightMaterials.Length];
             for (int i = 0; i < originalMaterials.Length; i++)
             {
-                originalMaterials[i] = originalHighlightRenderer.materials[i];
+                originalMaterials[i] = _originalHighlightMaterials[i];
             }
             actualHighlightRenderer.materials = originalMaterials;
         }
@@ -107,17 +100,27 @@ public class Selector : MonoBehaviour
         if (IsPointerOverUIElement()) return;
         if (!_actualHighlight) return;
         
-        bool isAlreadyHighlighted = _actualSelection.isHighlighted;
-        bool isAlreadySelected = _actualSelection.isSelected;
-        if (!isAlreadyHighlighted && !isAlreadySelected)
+        _isSelecting = true;
+        
+        SelectableElement previousSelection = _actualSelection;
+        
+        if (previousSelection)
         {
-            _originalSelection = _actualSelection;
+            if (_raycastHit.transform != previousSelection.transform) Unselect();
+        }
+        
+        _actualSelection = _raycastHit.transform.GetComponent<SelectableElement>();
+        if (!_actualSelection) return;
+
+        
+        if (_actualSelection.state == SelectableElement.SelectableElementState.SELECTED) return;
+        if (_actualSelection.state == SelectableElement.SelectableElementState.HIGHLIGHTED)
+        {
+            _originalSelectionMaterials = _originalHighlightMaterials;
             if (AudioManager.instance) AudioManager.instance.PlayClipAt(soundSelect, transform.position);
         }
 
-        _isSelecting = true;
-        _actualSelection.isHighlighted = false;
-        _actualSelection.isSelected = true;
+        _actualSelection.state = SelectableElement.SelectableElementState.SELECTED;
 
         MeshRenderer actualSelectionRenderer = _actualSelection.GetComponent<MeshRenderer>();
         if (actualSelectionRenderer)
@@ -140,8 +143,7 @@ public class Selector : MonoBehaviour
     {
         if (!_isSelecting) return;
         
-        _actualSelection.isSelected = false;
-        _actualSelection.isHighlighted = true;
+        _actualSelection.state = SelectableElement.SelectableElementState.UNUSED;
         
         if (AudioManager.instance) AudioManager.instance.PlayClipAt(soundUnselect, transform.position);
         
@@ -149,13 +151,12 @@ public class Selector : MonoBehaviour
         InputsManager.instance.DisableSelectionMode();
         
         MeshRenderer actualSelectionRenderer = _actualSelection.GetComponent<MeshRenderer>();
-        MeshRenderer originalSelectionRenderer = _originalSelection.GetComponent<MeshRenderer>();
-        if (actualSelectionRenderer && originalSelectionRenderer)
+        if (actualSelectionRenderer)
         {
-            Material[] originalMaterials = new Material[originalSelectionRenderer.materials.Length];
+            Material[] originalMaterials = new Material[_originalSelectionMaterials.Length];
             for (int i = 0; i < originalMaterials.Length; i++)
             {
-                originalMaterials[i] = originalSelectionRenderer.materials[i];
+                originalMaterials[i] = _originalSelectionMaterials[i];
             }
             actualSelectionRenderer.materials = originalMaterials;
         }
