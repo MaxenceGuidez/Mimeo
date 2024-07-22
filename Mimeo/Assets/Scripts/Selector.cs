@@ -40,9 +40,11 @@ public class Selector : MonoBehaviour
             SelectableElement selectableElementTouched = _raycastHit.transform.GetComponent<SelectableElement>();
             if (!selectableElementTouched) return;
             
-            _actualHighlight = selectableElementTouched;
-            
-            if (_actualHighlight.CompareTag("Selectable") && _actualHighlight != _actualSelection) Highlight();
+            if (selectableElementTouched.state == SelectableElement.SelectableState.UNUSED)
+            {
+                _actualHighlight = selectableElementTouched;
+                Highlight();
+            }
         }
     }
 
