@@ -15,6 +15,7 @@ public class Selector : MonoBehaviour
     
     private SelectableElement _actualHighlight;
     private SelectableElement _actualSelection;
+    private SelectableElement _previousHighlightForSFX;
     private Material[] _originalHighlightMaterials;
     private Material[] _originalSelectionMaterials;
     private RaycastHit _raycastHit;
@@ -38,7 +39,11 @@ public class Selector : MonoBehaviour
         if (Physics.Raycast(ray, out _raycastHit))
         {
             SelectableElement selectableElementTouched = _raycastHit.transform.GetComponent<SelectableElement>();
-            if (!selectableElementTouched) return;
+            if (!selectableElementTouched)
+            {
+                _previousHighlightForSFX = null;
+                return;
+            }
             
             if (selectableElementTouched.state == SelectableElement.SelectableState.UNUSED)
             {
@@ -65,8 +70,16 @@ public class Selector : MonoBehaviour
                 _originalHighlightMaterials[i] = new Material(originalMaterials[i]);
             }
         }
-        
-        if (AudioManager.instance) AudioManager.instance.PlayClipAt(soundHighlight, transform.position);
+
+        if (!_previousHighlightForSFX)
+        {
+            if (AudioManager.instance) AudioManager.instance.PlayClipAt(soundHighlight, transform.position);
+        }
+        else if (_actualHighlight.transform != _previousHighlightForSFX.transform)
+        {
+            if (AudioManager.instance) AudioManager.instance.PlayClipAt(soundHighlight, transform.position);
+        }
+        _previousHighlightForSFX = _actualHighlight;
         
         MeshRenderer actualHighlightRenderer = _actualHighlight.GetComponent<MeshRenderer>();
         if (actualHighlightRenderer)
@@ -81,7 +94,6 @@ public class Selector : MonoBehaviour
         
         textName.text = _actualHighlight.name;
     }
-
 
     public void Unhighlight()
     {
@@ -122,7 +134,6 @@ public class Selector : MonoBehaviour
         
         _actualSelection = _raycastHit.transform.GetComponent<SelectableElement>();
         if (!_actualSelection) return;
-
         
         if (_actualSelection.state == SelectableElement.SelectableState.SELECTED) return;
         if (_actualSelection.state == SelectableElement.SelectableState.HIGHLIGHTED)

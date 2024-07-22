@@ -184,6 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: NO DESCRIPTION
+  state: 0
 --- !u!1 &692756390
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,6 +332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: NO DESCRIPTION
+  state: 0
 --- !u!20 &1274392524 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 8935063278266361150, guid: d76f3a088858e7b46b5956ba1a10210a, type: 3}
@@ -492,6 +494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: NO DESCRIPTION
+  state: 0
 --- !u!1 &1633641112 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6248492204444776478, guid: ae5da690753ad6f4191a571ed92fb101, type: 3}
@@ -510,6 +513,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: NO DESCRIPTION
+  state: 0
 --- !u!1 &1751325310 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5004729279958473993, guid: d76f3a088858e7b46b5956ba1a10210a, type: 3}
@@ -924,6 +928,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: House
       objectReference: {fileID: 0}
+    - target: {fileID: 8666286433470564272, guid: ae5da690753ad6f4191a571ed92fb101, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 32dbbbe6eab89d94abac7b427c108e4b, type: 2}
     m_RemovedComponents:
     - {fileID: 3846480851611054807, guid: ae5da690753ad6f4191a571ed92fb101, type: 3}
     - {fileID: 170993083516126327, guid: ae5da690753ad6f4191a571ed92fb101, type: 3}
