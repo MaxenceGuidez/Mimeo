@@ -25,7 +25,7 @@ public class SelectorOld : MonoBehaviour
     private bool _isSelecting;
     private bool _isHighlighting;
     
-    public static Selector instance { get; private set; }
+    public static SelectorOld instance { get; private set; }
     
     private void Awake()
     {
