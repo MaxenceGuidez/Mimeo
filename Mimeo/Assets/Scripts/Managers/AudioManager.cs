@@ -5,6 +5,7 @@ public class AudioManager : MonoBehaviour
 {
     public AudioClip[] playlist;
     public AudioClip buttonHoverSound;
+    public AudioClip buttonClickSound;
     public AudioSource audioSource;
     public AudioMixerGroup sfxMixer;
     
@@ -50,8 +51,13 @@ public class AudioManager : MonoBehaviour
         return audioSource;
     }
 
-    public void ButtonHover()
+    public void OnButtonHover()
     {
         PlayClipAt(buttonHoverSound, new Vector3());
+    }
+
+    public void OnButtonClick()
+    {
+        PlayClipAt(buttonClickSound, new Vector3());
     }
 }

@@ -68,6 +68,6 @@ public class PauseMenu : MonoBehaviour
 
     public void OnHoverBtn()
     {
-        AudioManager.instance.ButtonHover();
+        AudioManager.instance.OnButtonHover();
     }
 }
