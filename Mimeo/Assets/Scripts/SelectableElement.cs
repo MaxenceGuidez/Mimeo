@@ -6,6 +6,11 @@ public class SelectableElement : MonoBehaviour
 
     private MeshRenderer _renderer;
     private Material[] _originalMaterials;
+    
+    [HideInInspector]
+    public bool isHighlighted { get; set; }
+    [HideInInspector]
+    public bool isSelected { get; set; }
 
     private void Start()
     {

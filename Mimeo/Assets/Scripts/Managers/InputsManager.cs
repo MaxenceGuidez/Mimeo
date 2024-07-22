@@ -6,6 +6,8 @@ public class InputsManager : MonoBehaviour
     public PauseMenu pauseMenu;
     public MainInputs mainInputs;
     
+    private float _oldLookSpeed;
+    
     public static InputsManager instance { get; private set; }
     
     private void Awake()
@@ -42,6 +44,27 @@ public class InputsManager : MonoBehaviour
         mainInputs.Selector.Unselect.performed -= Unselect;
         mainInputs.Menu.Pause.performed -= Pause;
         mainInputs.Menu.Settings.performed -= OpenSettings;
+    }
+
+    public void EnableSelectionMode()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        
+        mainInputs.FPSController.Move.Disable();
+
+        float actualLookSpeed = FPSController.instance.lookSpeed;
+        if (!Mathf.Approximately(actualLookSpeed, 2f)) _oldLookSpeed = actualLookSpeed;
+        FPSController.instance.lookSpeed = 2f;
+    }
+
+    public void DisableSelectionMode()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        
+        mainInputs.FPSController.Move.Enable();
+        FPSController.instance.lookSpeed = _oldLookSpeed;
     }
 
     private void Sprint(InputAction.CallbackContext context)

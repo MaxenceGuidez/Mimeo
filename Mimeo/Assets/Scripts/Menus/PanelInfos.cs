@@ -19,6 +19,14 @@ public class PanelInfos : MonoBehaviour
     private Vector3 _openPosition;
     private bool _isAnimating;
     
+    public static PanelInfos instance { get; private set; }
+    
+    private void Awake()
+    {
+        if (instance && instance != this) Destroy(this); 
+        else instance = this;
+    }
+    
     void Start()
     {
         _closedPosition = transform.localPosition;
