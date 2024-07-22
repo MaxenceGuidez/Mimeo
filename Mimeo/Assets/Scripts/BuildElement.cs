@@ -1,5 +1,12 @@
 using UnityEngine;
 
+/// <summary>
+/// Represents an element in the build system with configurable visual properties and states.
+/// This class handles the appearance of the element by allowing the modification of colors and textures
+/// and manages the element's state within the build system.
+/// </summary>
+/// <author>GUIDEZ Maxence</author>
+/// <date>2024-07-22</date>
 public class BuildElement : MonoBehaviour
 {
     public string description = "NO DESCRIPTION";
@@ -8,6 +15,9 @@ public class BuildElement : MonoBehaviour
     private Material[] _originalMaterials;
     public ElementState state;
 
+    /// <summary>
+    /// Enum representing the possible states of the build element.
+    /// </summary>
     public enum ElementState
     {
         HIGHLIGHTED,
@@ -15,6 +25,11 @@ public class BuildElement : MonoBehaviour
         UNUSED
     }
 
+    /// <summary>
+    /// Initializes the build element.
+    /// Sets the tag of the game object to "Selectable", initializes the renderer and original materials,
+    /// and sets the initial state of the element to UNUSED.
+    /// </summary>
     private void Start()
     {
         gameObject.tag = "Selectable";
@@ -25,6 +40,12 @@ public class BuildElement : MonoBehaviour
         state = ElementState.UNUSED;
     }
 
+    /// <summary>
+    /// Sets the color of the build element's materials.
+    /// Updates each material's color to the provided material's color. If the provided material is null,
+    /// the original color of each material is retained.
+    /// </summary>
+    /// <param name="materialColor">The material containing the color to apply. If null, the original colors are used.</param>
     public void SetColor(Material materialColor)
     {
         Material[] newMaterials = _renderer.materials;
@@ -35,6 +56,12 @@ public class BuildElement : MonoBehaviour
         _renderer.materials = newMaterials;
     }
 
+    /// <summary>
+    /// Sets the texture of the build element's materials.
+    /// Updates each material's main texture to the provided material's main texture. If the provided material is null,
+    /// the original texture of each material is retained.
+    /// </summary>
+    /// <param name="materialTexture">The material containing the texture to apply. If null, the original textures are used.</param>
     public void SetTexture(Material materialTexture)
     {
         Material[] newMaterials = _renderer.materials;
