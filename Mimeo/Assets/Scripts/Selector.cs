@@ -102,14 +102,14 @@ public class Selector : MonoBehaviour
         if (IsPointerOverUIElement()) return;
         if (!_actualHighlight) return;
         
-        _isSelecting = true;
-        
         SelectableElement previousSelection = _actualSelection;
         
         if (previousSelection)
         {
             if (_raycastHit.transform != previousSelection.transform) Unselect();
         }
+        
+        _isSelecting = true;
         
         _actualSelection = _raycastHit.transform.GetComponent<SelectableElement>();
         if (!_actualSelection) return;
