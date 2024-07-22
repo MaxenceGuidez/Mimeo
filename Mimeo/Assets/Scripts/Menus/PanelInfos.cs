@@ -40,6 +40,10 @@ public class PanelInfos : MonoBehaviour
         textFieldName.text = _selectedElement.name;
         textFieldDescription.text = _selectedElement.description;
         
+        MeshRenderer selectedRenderer = _selectedElement.GetComponent<MeshRenderer>();
+        dropdownColor.value = GetIndexOfColor(selectedRenderer.material.color);
+        dropdownTexture.value = GetIndexOfTexture(selectedRenderer.material.mainTexture);
+        
         if (!_isAnimating)
         {
             StartCoroutine(TranslateUIElementTo(transform, _openPosition));
@@ -120,5 +124,29 @@ public class PanelInfos : MonoBehaviour
 
         if (dropdownTexture.value == 0) _selectedElement.SetTexture(null);
         else _selectedElement.SetTexture(textureMaterials[dropdownTexture.value - 1]);
+    }
+    
+    int GetIndexOfColor(Color colorToFind)
+    {
+        for (int i = 1; i < colorMaterials.Length; i++)
+        {
+            if (colorMaterials[i].color == colorToFind)
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
+    
+    int GetIndexOfTexture(Texture textureToFind)
+    {
+        for (int i = 1; i < textureMaterials.Length; i++)
+        {
+            if (textureMaterials[i].mainTexture == textureToFind)
+            {
+                return i;
+            }
+        }
+        return 0;
     }
 }
