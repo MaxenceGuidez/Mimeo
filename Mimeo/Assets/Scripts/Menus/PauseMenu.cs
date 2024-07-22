@@ -46,23 +46,31 @@ public class PauseMenu : MonoBehaviour
 
     public void OnClickBtnResume()
     {
+        AudioManager.instance.OnButtonClick();
+        
         Resume();
     }
     
     public void OnClickBtnSettings()
     {
+        AudioManager.instance.OnButtonClick();
+        
         gameObject.SetActive(false);
         settingsMenu.gameObject.SetActive(true);
     }
     
     public void OnClickBtnMainMenu()
     {
+        AudioManager.instance.OnButtonClick();
+        
         Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
     
     public void OnClickBtnQuit()
     {
+        AudioManager.instance.OnButtonClick();
+        
         Application.Quit();
     }
 

@@ -47,6 +47,7 @@ public class AudioManager : MonoBehaviour
         audioSource.clip = clip;
         audioSource.outputAudioMixerGroup = sfxMixer;
         audioSource.Play();
+        DontDestroyOnLoad(tempGo);
         Destroy(tempGo, clip.length);
         return audioSource;
     }

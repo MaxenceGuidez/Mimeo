@@ -12,6 +12,8 @@ public class SettingsMenu : MonoBehaviour
 
     public void OnClickBtnReturn()
     {
+        AudioManager.instance.OnButtonClick();
+        
         gameObject.SetActive(false);
         
         if (mainMenu) mainMenu.gameObject.SetActive(true);

@@ -352,6 +352,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: bd1358e1295174346ace33b582f486a5, type: 3}
   - {fileID: 8300000, guid: 031b31e2df2c1ad4e87bd0d502197700, type: 3}
   buttonHoverSound: {fileID: 8300000, guid: 4c463e0e31543e64fa029c3bfb4b4b33, type: 3}
+  buttonClickSound: {fileID: 8300000, guid: 63e08d886b023d646ba479b6056beae6, type: 3}
   audioSource: {fileID: 1470069566}
   sfxMixer: {fileID: 7636091077053844703, guid: 439c3f457df09d0458db744be3ca4e12, type: 2}
 --- !u!82 &1470069566
