@@ -14,7 +14,7 @@ public class PanelInfos : MonoBehaviour
     public Material[] colorMaterials;
     public Material[] textureMaterials;
 
-    private SelectableElement _selectedElement;
+    private BuildElement _selectedElement;
     private Vector3 _closedPosition;
     private Vector3 _openPosition;
     private bool _isAnimating;
@@ -40,7 +40,7 @@ public class PanelInfos : MonoBehaviour
         dropdownTexture.onValueChanged.AddListener(delegate { UpdateMaterial(); });
     }
 
-    public void Open(SelectableElement selected)
+    public void Open(BuildElement selected)
     {
         if (!selected) return;
         _selectedElement = selected;

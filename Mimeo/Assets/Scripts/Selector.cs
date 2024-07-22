@@ -13,9 +13,9 @@ public class Selector : MonoBehaviour
     public AudioClip soundSelect;
     public AudioClip soundUnselect;
     
-    private SelectableElement _actualHighlight;
-    private SelectableElement _actualSelection;
-    private SelectableElement _previousHighlightForSFX;
+    private BuildElement _actualHighlight;
+    private BuildElement _actualSelection;
+    private BuildElement _previousHighlightForSFX;
     private Material[] _originalHighlightMaterials;
     private Material[] _originalSelectionMaterials;
     private RaycastHit _raycastHit;
@@ -38,16 +38,16 @@ public class Selector : MonoBehaviour
         Ray ray = playerCamera.ScreenPointToRay(middleScreen);
         if (Physics.Raycast(ray, out _raycastHit))
         {
-            SelectableElement selectableElementTouched = _raycastHit.transform.GetComponent<SelectableElement>();
-            if (!selectableElementTouched)
+            BuildElement buildElementTouched = _raycastHit.transform.GetComponent<BuildElement>();
+            if (!buildElementTouched)
             {
                 _previousHighlightForSFX = null;
                 return;
             }
             
-            if (selectableElementTouched.state == SelectableElement.SelectableState.UNUSED)
+            if (buildElementTouched.state == BuildElement.ElementState.UNUSED)
             {
-                _actualHighlight = selectableElementTouched;
+                _actualHighlight = buildElementTouched;
                 Highlight();
             }
         }
@@ -57,8 +57,8 @@ public class Selector : MonoBehaviour
     {
         _isHighlighting = true;
 
-        if (_actualHighlight.state != SelectableElement.SelectableState.UNUSED) return;
-        _actualHighlight.state = SelectableElement.SelectableState.HIGHLIGHTED;
+        if (_actualHighlight.state != BuildElement.ElementState.UNUSED) return;
+        _actualHighlight.state = BuildElement.ElementState.HIGHLIGHTED;
         
         MeshRenderer highlightRenderer = _actualHighlight.GetComponent<MeshRenderer>();
         if (highlightRenderer)
@@ -99,7 +99,7 @@ public class Selector : MonoBehaviour
     {
         if (!_isHighlighting) return;
         
-        _actualHighlight.state = SelectableElement.SelectableState.UNUSED;
+        _actualHighlight.state = BuildElement.ElementState.UNUSED;
         
         MeshRenderer actualHighlightRenderer = _actualHighlight.GetComponent<MeshRenderer>();
         if (actualHighlightRenderer)
@@ -123,7 +123,7 @@ public class Selector : MonoBehaviour
         if (IsPointerOverUIElement()) return;
         if (!_actualHighlight) return;
         
-        SelectableElement previousSelection = _actualSelection;
+        BuildElement previousSelection = _actualSelection;
         
         if (previousSelection)
         {
@@ -132,17 +132,17 @@ public class Selector : MonoBehaviour
         
         _isSelecting = true;
         
-        _actualSelection = _raycastHit.transform.GetComponent<SelectableElement>();
+        _actualSelection = _raycastHit.transform.GetComponent<BuildElement>();
         if (!_actualSelection) return;
         
-        if (_actualSelection.state == SelectableElement.SelectableState.SELECTED) return;
-        if (_actualSelection.state == SelectableElement.SelectableState.HIGHLIGHTED)
+        if (_actualSelection.state == BuildElement.ElementState.SELECTED) return;
+        if (_actualSelection.state == BuildElement.ElementState.HIGHLIGHTED)
         {
             _originalSelectionMaterials = _originalHighlightMaterials;
             if (AudioManager.instance) AudioManager.instance.PlayClipAt(soundSelect, transform.position);
         }
 
-        _actualSelection.state = SelectableElement.SelectableState.SELECTED;
+        _actualSelection.state = BuildElement.ElementState.SELECTED;
 
         MeshRenderer actualSelectionRenderer = _actualSelection.GetComponent<MeshRenderer>();
         if (actualSelectionRenderer)
@@ -165,7 +165,7 @@ public class Selector : MonoBehaviour
     {
         if (!_isSelecting) return;
         
-        _actualSelection.state = SelectableElement.SelectableState.UNUSED;
+        _actualSelection.state = BuildElement.ElementState.UNUSED;
         
         if (AudioManager.instance) AudioManager.instance.PlayClipAt(soundUnselect, transform.position);
         

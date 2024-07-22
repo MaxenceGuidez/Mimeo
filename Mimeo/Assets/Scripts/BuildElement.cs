@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class SelectableElement : MonoBehaviour
+public class BuildElement : MonoBehaviour
 {
     public string description = "NO DESCRIPTION";
 
     private MeshRenderer _renderer;
     private Material[] _originalMaterials;
-    public SelectableState state;
+    public ElementState state;
 
-    public enum SelectableState
+    public enum ElementState
     {
         HIGHLIGHTED,
         SELECTED,
@@ -22,7 +22,7 @@ public class SelectableElement : MonoBehaviour
         _renderer = GetComponent<MeshRenderer>();
         _originalMaterials = _renderer.materials;
 
-        state = SelectableState.UNUSED;
+        state = ElementState.UNUSED;
     }
 
     public void SetColor(Material materialColor)
