@@ -12,7 +12,7 @@ public class SettingsMenu : MonoBehaviour
 
     public void OnClickBtnReturn()
     {
-        AudioManager.instance.OnButtonClick();
+        if (AudioManager.instance) AudioManager.instance.OnButtonClick();
         
         gameObject.SetActive(false);
         
@@ -22,6 +22,6 @@ public class SettingsMenu : MonoBehaviour
 
     public void OnHoverBtn()
     {
-        AudioManager.instance.OnButtonHover();
+        if (AudioManager.instance) AudioManager.instance.OnButtonHover();
     }
 }

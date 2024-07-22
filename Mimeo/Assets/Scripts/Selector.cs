@@ -10,6 +10,9 @@ public class Selector : MonoBehaviour
     public Material selectionMaterial;
     public TextMeshProUGUI textName;
     public PanelInfos panelInfos;
+    public AudioClip soundHighlight;
+    public AudioClip soundSelect;
+    public AudioClip soundUnselect;
 
     private Material[] _originalMaterialHighlight;
     private Material[] _originalMaterialSelection;
@@ -65,8 +68,9 @@ public class Selector : MonoBehaviour
         if (renderer.material != selectionMaterial)
         {
             _isSelecting = true;
-            _previousSelectedElement = renderer;
+            if (AudioManager.instance) AudioManager.instance.PlayClipAt(soundSelect, transform.position);
             
+            _previousSelectedElement = renderer;
             _originalMaterialSelection = _originalMaterialHighlight;
             Material[] newMaterials = new Material[renderer.materials.Length];
             for (int i = 0; i < newMaterials.Length; i++)
@@ -93,6 +97,8 @@ public class Selector : MonoBehaviour
     public void Unselect()
     {
         if (!_isSelecting) return;
+        
+        if (AudioManager.instance) AudioManager.instance.PlayClipAt(soundUnselect, transform.position);
         
         panelInfos.Close();
 
@@ -123,6 +129,16 @@ public class Selector : MonoBehaviour
             if (renderer.material != highlightMaterial)
             {
                 _isHighlighting = true;
+
+                if (!_previousHighlightedElement)
+                {
+                    if (AudioManager.instance) AudioManager.instance.PlayClipAt(soundHighlight, transform.position);
+                }
+                else if (_highlight != _previousHighlightedElement.transform)
+                {
+                    if (AudioManager.instance) AudioManager.instance.PlayClipAt(soundHighlight, transform.position);
+                }
+                
                 _previousHighlightedElement = renderer;
                 _originalMaterialHighlight = renderer.materials;
                 Material[] newMaterials = new Material[renderer.materials.Length];

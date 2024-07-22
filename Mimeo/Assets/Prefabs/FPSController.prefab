@@ -186,6 +186,11 @@ MonoBehaviour:
   playerCamera: {fileID: 8935063278266361150}
   highlightMaterial: {fileID: 2100000, guid: 684b9a90708d0ce438f91ad1c83df85d, type: 2}
   selectionMaterial: {fileID: 2100000, guid: 7200c0d7acdbac942b01fef4cafad532, type: 2}
+  textName: {fileID: 0}
+  panelInfos: {fileID: 0}
+  soundHighlight: {fileID: 8300000, guid: 480fa7f77544f0e40a131de6e27f9ec1, type: 3}
+  soundSelect: {fileID: 8300000, guid: f9342ec150603854eac48d1551d2e032, type: 3}
+  soundUnselect: {fileID: 8300000, guid: 32486c85ced6a854c89d32c08a60b425, type: 3}
 --- !u!1 &6787274411275156784
 GameObject:
   m_ObjectHideFlags: 0

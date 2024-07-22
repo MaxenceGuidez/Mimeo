@@ -46,14 +46,14 @@ public class PauseMenu : MonoBehaviour
 
     public void OnClickBtnResume()
     {
-        AudioManager.instance.OnButtonClick();
+        if (AudioManager.instance) AudioManager.instance.OnButtonClick();
         
         Resume();
     }
     
     public void OnClickBtnSettings()
     {
-        AudioManager.instance.OnButtonClick();
+        if (AudioManager.instance) AudioManager.instance.OnButtonClick();
         
         gameObject.SetActive(false);
         settingsMenu.gameObject.SetActive(true);
@@ -61,7 +61,7 @@ public class PauseMenu : MonoBehaviour
     
     public void OnClickBtnMainMenu()
     {
-        AudioManager.instance.OnButtonClick();
+        if (AudioManager.instance) AudioManager.instance.OnButtonClick();
         
         Time.timeScale = 1;
         SceneManager.LoadScene(0);
@@ -69,13 +69,13 @@ public class PauseMenu : MonoBehaviour
     
     public void OnClickBtnQuit()
     {
-        AudioManager.instance.OnButtonClick();
+        if (AudioManager.instance) AudioManager.instance.OnButtonClick();
         
         Application.Quit();
     }
 
     public void OnHoverBtn()
     {
-        AudioManager.instance.OnButtonHover();
+        if (AudioManager.instance) AudioManager.instance.OnButtonHover();
     }
 }
