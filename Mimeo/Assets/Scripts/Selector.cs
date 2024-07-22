@@ -56,23 +56,32 @@ public class Selector : MonoBehaviour
         _actualHighlight.state = SelectableElement.SelectableState.HIGHLIGHTED;
         
         MeshRenderer highlightRenderer = _actualHighlight.GetComponent<MeshRenderer>();
-        if (highlightRenderer) _originalHighlightMaterials = highlightRenderer.materials;
+        if (highlightRenderer)
+        {
+            Material[] originalMaterials = highlightRenderer.materials;
+            _originalHighlightMaterials = new Material[originalMaterials.Length];
+            for (int i = 0; i < originalMaterials.Length; i++)
+            {
+                _originalHighlightMaterials[i] = new Material(originalMaterials[i]);
+            }
+        }
         
         if (AudioManager.instance) AudioManager.instance.PlayClipAt(soundHighlight, transform.position);
         
         MeshRenderer actualHighlightRenderer = _actualHighlight.GetComponent<MeshRenderer>();
         if (actualHighlightRenderer)
         {
-            Material[] newMaterials = new Material[actualHighlightRenderer.materials.Length];
+            Material[] newMaterials = actualHighlightRenderer.materials;
             for (int i = 0; i < newMaterials.Length; i++)
             {
-                newMaterials[i] = highlightMaterial;
+                newMaterials[i].color = highlightMaterial.color;
             }
             actualHighlightRenderer.materials = newMaterials;
         }
         
         textName.text = _actualHighlight.name;
     }
+
 
     public void Unhighlight()
     {
@@ -127,10 +136,10 @@ public class Selector : MonoBehaviour
         MeshRenderer actualSelectionRenderer = _actualSelection.GetComponent<MeshRenderer>();
         if (actualSelectionRenderer)
         {
-            Material[] newMaterials = new Material[actualSelectionRenderer.materials.Length];
+            Material[] newMaterials = actualSelectionRenderer.materials;
             for (int i = 0; i < newMaterials.Length; i++)
             {
-                newMaterials[i] = selectionMaterial;
+                newMaterials[i].color = selectionMaterial.color;
             }
             actualSelectionRenderer.materials = newMaterials;
         }
