@@ -69,6 +69,9 @@ public class Selector : MonoBehaviour
         {
             _isSelecting = true;
             if (AudioManager.instance) AudioManager.instance.PlayClipAt(soundSelect, transform.position);
+
+            SelectableElement selectableElement = _selection.GetComponent<SelectableElement>();
+            if (selectableElement) panelInfos.Open(selectableElement);
             
             _previousSelectedElement = renderer;
             _originalMaterialSelection = _originalMaterialHighlight;
@@ -78,9 +81,6 @@ public class Selector : MonoBehaviour
                 newMaterials[i] = selectionMaterial;
             }
             renderer.materials = newMaterials;
-
-            SelectableElement selectableElement = _selection.GetComponent<SelectableElement>();
-            if (selectableElement) panelInfos.Open(selectableElement);
             
             InputsManager.instance.mainInputs.FPSController.Move.Disable();
 
