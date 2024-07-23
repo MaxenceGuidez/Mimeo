@@ -1,3 +1,0 @@
-# HouseModel
-
-Start typing here...
