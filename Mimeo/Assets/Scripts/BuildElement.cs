@@ -7,7 +7,7 @@ using UnityEngine;
 /// and manages the element's state within the build system.
 /// </summary>
 /// <author>GUIDEZ Maxence</author>
-/// <date>2024-07-22</date>
+/// <date>2024-07-23</date>
 public class BuildElement : MonoBehaviour
 {
     public string description = "NO DESCRIPTION";
@@ -67,7 +67,12 @@ public class BuildElement : MonoBehaviour
         _renderer.materials = newMaterials;
     }
 
-    //TODO : Doc
+    /// <summary>
+    /// Sets the texture of the build element's materials.
+    /// Updates each material's texture to the provided material's main texture and normal map. If the provided material is null,
+    /// the original texture and normal map of each material are retained.
+    /// </summary>
+    /// <param name="materialTexture">The material containing the texture and normal map to apply. If null, the original textures are used.</param>
     public void SetTexture(Material materialTexture)
     {
         Material[] newMaterials = _renderer.materials;

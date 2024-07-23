@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 /// It integrates with the Unity Input System to process inputs for FPS controls, menu interactions, and selection actions.
 /// </summary>
 /// <author>GUIDEZ Maxence</author>
-/// <date>2024-07-22</date>
+/// <date>2024-07-23</date>
 public class InputsManager : MonoBehaviour
 {
     public PauseMenu pauseMenu;
@@ -129,7 +129,8 @@ public class InputsManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Handles the pause input action, triggering the pause functionality in the PauseMenu.
+    /// Handles the pause input action, triggering the pause functionality in the PauseMenu. If the app is already paused,
+    /// it resumes.
     /// </summary>
     /// <param name="context">The input action callback context.</param>
     private void Pause(InputAction.CallbackContext context)

@@ -3,6 +3,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Manages the selection and highlighting of build elements in the app world.
+/// This class handles visual feedback, audio cues, and state changes for elements that the player interacts with.
+/// </summary>
+/// <author>GUIDEZ Maxence</author>
+/// <date>2024-07-23</date>
 public class Selector : MonoBehaviour
 {
     public Camera playerCamera;
@@ -24,12 +30,20 @@ public class Selector : MonoBehaviour
     
     public static Selector instance { get; private set; }
     
+    /// <summary>
+    /// Initializes the Selector instance.
+    /// If another instance of Selector exists, it destroys the new one to maintain a single instance.
+    /// </summary>
     private void Awake()
     {
         if (instance && instance != this) Destroy(this); 
         else instance = this;
     }
 
+    /// <summary>
+    /// Performs an update each frame to handle highlighting of build elements.
+    /// Casts a ray from the center of the screen to detect build elements and highlight them if necessary.
+    /// </summary>
     void Update()
     {
         if (_actualHighlight) Unhighlight();
@@ -53,6 +67,10 @@ public class Selector : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Highlights the currently hovered build element by changing its material and playing a highlight sound.
+    /// Updates the textName to display the name of the highlighted element.
+    /// </summary>
     private void Highlight()
     {
         _isHighlighting = true;
@@ -95,6 +113,11 @@ public class Selector : MonoBehaviour
         textName.text = _actualHighlight.name;
     }
 
+    /// <summary>
+    /// Removes the highlight from the currently highlighted build element.
+    /// Restores the original materials and resets the highlighted status.
+    /// Resets textName to "NO NAME".
+    /// </summary>
     public void Unhighlight()
     {
         if (!_isHighlighting) return;
@@ -118,6 +141,12 @@ public class Selector : MonoBehaviour
         textName.text = "NO NAME";
     }
     
+    /// <summary>
+    /// Selects the currently highlighted build element.
+    /// If an element was previously selected, it is unselected.
+    /// Updates the appearance of the selected element and plays the selection sound.
+    /// Opens the PanelInfos UI with the selected element and enable selection mode.
+    /// </summary>
     public void Select()
     {
         if (IsPointerOverUIElement()) return;
@@ -167,6 +196,11 @@ public class Selector : MonoBehaviour
         _actualHighlight = null;
     }
 
+    /// <summary>
+    /// Unselects the currently selected build element.
+    /// Resets the appearance of the element, stops selection mode, and closes the PanelInfos UI.
+    /// Plays the unselect sound.
+    /// </summary>
     public void Unselect()
     {
         if (!_isSelecting) return;
@@ -193,6 +227,10 @@ public class Selector : MonoBehaviour
         _isSelecting = false;
     }
 
+    /// <summary>
+    /// Updates the stored original materials for the currently selected build element.
+    /// This is used to restore the original appearance of the selected element when unselecting.
+    /// </summary>
     public void UpdateOriginalMaterial()
     {
         MeshRenderer actualSelectionRenderer = _actualSelection.GetComponent<MeshRenderer>();
@@ -202,6 +240,11 @@ public class Selector : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Checks if the mouse pointer is currently over a UI element.
+    /// This is used to prevent interaction with build elements while interacting with the UI.
+    /// </summary>
+    /// <returns>True if the pointer is over a UI element; otherwise, false.</returns>
     private bool IsPointerOverUIElement()
     {
         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current)
