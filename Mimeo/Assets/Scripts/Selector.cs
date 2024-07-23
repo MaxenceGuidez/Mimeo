@@ -138,7 +138,13 @@ public class Selector : MonoBehaviour
         if (_actualSelection.state == BuildElement.ElementState.SELECTED) return;
         if (_actualSelection.state == BuildElement.ElementState.HIGHLIGHTED)
         {
-            _originalSelectionMaterials = _originalHighlightMaterials;
+            Material[] originalHighlightMaterials = _originalHighlightMaterials;
+            _originalSelectionMaterials = new Material[originalHighlightMaterials.Length];
+            for (int i = 0; i < originalHighlightMaterials.Length; i++)
+            {
+                _originalSelectionMaterials[i] = new Material(originalHighlightMaterials[i]);
+            }
+            
             if (AudioManager.instance) AudioManager.instance.PlayClipAt(soundSelect, transform.position);
         }
         
@@ -190,7 +196,7 @@ public class Selector : MonoBehaviour
     public void UpdateOriginalMaterial()
     {
         MeshRenderer actualSelectionRenderer = _actualSelection.GetComponent<MeshRenderer>();
-        if (actualSelectionRenderer)
+        if (actualSelectionRenderer && _actualSelection.state == BuildElement.ElementState.SELECTED)
         {
             _originalSelectionMaterials = actualSelectionRenderer.materials;
         }
