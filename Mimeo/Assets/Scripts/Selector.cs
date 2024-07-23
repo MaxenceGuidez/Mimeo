@@ -141,7 +141,10 @@ public class Selector : MonoBehaviour
             _originalSelectionMaterials = _originalHighlightMaterials;
             if (AudioManager.instance) AudioManager.instance.PlayClipAt(soundSelect, transform.position);
         }
-
+        
+        InputsManager.instance.EnableSelectionMode();
+        PanelInfos.instance.Open(_actualSelection);
+        
         _actualSelection.state = BuildElement.ElementState.SELECTED;
 
         MeshRenderer actualSelectionRenderer = _actualSelection.GetComponent<MeshRenderer>();
@@ -154,9 +157,6 @@ public class Selector : MonoBehaviour
             }
             actualSelectionRenderer.materials = newMaterials;
         }
-        
-        InputsManager.instance.EnableSelectionMode();
-        PanelInfos.instance.Open(_actualSelection);
         
         _actualHighlight = null;
     }

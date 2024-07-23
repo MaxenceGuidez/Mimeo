@@ -25,6 +25,5 @@ These are points that could be improved in the future:
 
 ## Bugs
 These are issues I haven't had time to fix:
-- The original brick texture remains visible even if we change the texture; it just stays in the background.
 - If we select an element that has already been modified, it resets to its original color and texture.
 - The wall of the building I found causes the textures to be rotated 90 degrees.

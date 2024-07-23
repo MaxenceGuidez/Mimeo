@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -13,7 +14,7 @@ public class BuildElement : MonoBehaviour
 
     private MeshRenderer _renderer;
     private Material[] _originalMaterials;
-    public ElementState state;
+    public ElementState state = ElementState.UNUSED;
 
     /// <summary>
     /// Enum representing the possible states of the build element.
@@ -35,7 +36,15 @@ public class BuildElement : MonoBehaviour
         gameObject.tag = "Selectable";
         
         _renderer = GetComponent<MeshRenderer>();
-        _originalMaterials = _renderer.materials;
+        if (_renderer)
+        {
+            _originalMaterials = new Material[_renderer.materials.Length];
+            for (int i = 0; i < _originalMaterials.Length; i++)
+            {
+                _originalMaterials[i] = new Material(_renderer.materials[i]);
+            }
+        }
+        else _originalMaterials = Array.Empty<Material>();
 
         state = ElementState.UNUSED;
     }
@@ -48,6 +57,8 @@ public class BuildElement : MonoBehaviour
     /// <param name="materialColor">The material containing the color to apply. If null, the original colors are used.</param>
     public void SetColor(Material materialColor)
     {
+        if (state != ElementState.SELECTED) return;
+            
         Material[] newMaterials = _renderer.materials;
         for (int i = 0; i < newMaterials.Length; i++)
         {
@@ -56,12 +67,7 @@ public class BuildElement : MonoBehaviour
         _renderer.materials = newMaterials;
     }
 
-    /// <summary>
-    /// Sets the texture of the build element's materials.
-    /// Updates each material's main texture to the provided material's main texture. If the provided material is null,
-    /// the original texture of each material is retained.
-    /// </summary>
-    /// <param name="materialTexture">The material containing the texture to apply. If null, the original textures are used.</param>
+    //TODO : Doc
     public void SetTexture(Material materialTexture)
     {
         Material[] newMaterials = _renderer.materials;
