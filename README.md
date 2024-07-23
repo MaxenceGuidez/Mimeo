@@ -36,10 +36,18 @@ Mimeo is a renovation application where the objective is to navigate through a h
 
 ## Getting Started
 
+### Open the app
 1. Clone the repository: `git clone https://github.com/MaxenceGuidez/Mimeo.git`
 2. Open the project in Unity 2022.3.38f1 (or the latest update).
 3. Once the project is fully loaded, build it using Ctrl + B.
 4. Explore the house model and try the selection system!
+
+### Open the documentation
+1. Clone the repository: `git clone https://github.com/MaxenceGuidez/Mimeo.git`
+2. Download and install [http-server](https://www.npmjs.com/package/http-server) via npm
+3. Open your terminal and go to the doc folder (.../Mimeo/doc)
+4. Run the command `http-server ./` (if not working try `npx http-server`)
+5. Open http://localhost:8080 in a web browser.
 
 ## License
 
