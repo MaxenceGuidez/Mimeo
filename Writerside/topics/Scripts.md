@@ -9,8 +9,6 @@ The FPSController class is the core component that manages first-person movement
 ### Selector
 <warning>TODO</warning>
 
-Firsly I want to mention the original creator https://www.youtube.com/@DA-LAB
-
 ### BuildElement
 The BuildElement class represents a customizable part of the build model within the Mimeo application. Each instance of BuildElement can be individually selected and modified by the user, allowing for dynamic changes to its color and texture. The class manages the visual state of the element, including highlighting and selecting states, which helps users identify and interact with different parts of the model. By providing methods to change the appearance of the elements, BuildElement enables a high level of customization, allowing users to experiment with different design choices. This class is fundamental to the renovation system in Mimeo, offering an interactive and engaging way for users to personalize the house model.
 
@@ -35,6 +33,3 @@ The SettingsMenu class provides a comprehensive interface for users to customize
 
 ### PauseMenu
 The PauseMenu class in Mimeo is designed to manage the in-game pause functionality. It provides users with the ability to pause the game, access settings, and navigate back to the main menu or quit the application. When the game is paused, the class ensures that the game state is properly handled, freezing the game time and unlocking the cursor for menu navigation. It integrates with InputsManager to disable in-game controls while the pause menu is active and re-enable them upon resuming. The PauseMenu also interacts with AudioManager to provide audio feedback for button interactions, maintaining a consistent user experience. This class is vital for offering users control over their game session, allowing them to take breaks, adjust settings, and manage their gameplay experience effectively.
-
-## Other credits
-Image de <a href="https://fr.freepik.com/photos-gratuite/concept-architecture-copyspace-gauche_2369069.htm#query=reconstruction%20a%20resolution%208k&position=35&from_view=keyword&track=ais_user&uuid=99378784-87cc-48b6-8b22-fe8c988e216a">Freepik</a>
