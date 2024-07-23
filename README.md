@@ -2,6 +2,7 @@
 
 ## Overview
 Mimeo is a renovation application where the objective is to navigate through a house model and interact with a selection system. This system allows users to modify the specifications of various parts of the build, such as changing the name, description, color, or texture of elements within the model.> Made in 3 days
+> Test asked by Bimeo to get a block release training. Conditions: 5 days
 
 ## Table of Contents
 - [Features](#features)
@@ -28,10 +29,10 @@ Mimeo is a renovation application where the objective is to navigate through a h
 - **Rider**: The JetBrains IDE of choice for C# development in this project. Rider offers a seamless and efficient coding environment, enhancing the development workflow with its robust set of features and tools.
 
 ## Demo
-![Screenshot](Writerside/images/screenshot_2024-07-22_01.png)
-![Screenshot](Writerside/images/screenshot_2024-07-22_02.png)
-![Screenshot](Writerside/images/screenshot_2024-07-22_03.png)
-![Screenshot](Writerside/images/screenshot_2024-07-22_04.png)
+![Screenshot](Writerside/images/readme/screenshot_2024-07-22_01.png)
+![Screenshot](Writerside/images/readme/screenshot_2024-07-22_02.png)
+![Screenshot](Writerside/images/readme/screenshot_2024-07-22_03.png)
+![Screenshot](Writerside/images/readme/screenshot_2024-07-22_04.png)
 
 ## Getting Started
 
