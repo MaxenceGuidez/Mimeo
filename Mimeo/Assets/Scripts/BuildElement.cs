@@ -65,10 +65,22 @@ public class BuildElement : MonoBehaviour
     public void SetTexture(Material materialTexture)
     {
         Material[] newMaterials = _renderer.materials;
+
         for (int i = 0; i < newMaterials.Length; i++)
         {
-            newMaterials[i].mainTexture = materialTexture == null ? _originalMaterials[i].mainTexture : materialTexture.mainTexture;
+            if (materialTexture != null)
+            {
+                newMaterials[i].SetTexture("_BumpMap", materialTexture.GetTexture("_BumpMap"));
+                newMaterials[i].mainTexture = materialTexture.mainTexture;
+            }
+            else
+            {
+                newMaterials[i].SetTexture("_BumpMap", _originalMaterials[i].GetTexture("_BumpMap"));
+                newMaterials[i].mainTexture = _originalMaterials[i].mainTexture;
+            }
         }
+
         _renderer.materials = newMaterials;
     }
+
 }
