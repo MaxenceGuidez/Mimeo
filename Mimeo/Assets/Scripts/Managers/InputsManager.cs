@@ -134,7 +134,14 @@ public class InputsManager : MonoBehaviour
     /// <param name="context">The input action callback context.</param>
     private void Pause(InputAction.CallbackContext context)
     {
-        pauseMenu.Pause();
+        if (Time.timeScale != 0)
+        {
+            pauseMenu.Pause();
+        }
+        else
+        {
+            pauseMenu.Resume();
+        }
     }
 
     /// <summary>
