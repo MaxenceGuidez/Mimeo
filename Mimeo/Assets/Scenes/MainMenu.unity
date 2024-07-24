@@ -459,15 +459,43 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1470069565}
     - target: {fileID: 2879670429360642647, guid: 4fbfe2d9558f3ca4584eda2afa9cc69c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2879670429360642647, guid: 4fbfe2d9558f3ca4584eda2afa9cc69c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2879670429360642647, guid: 4fbfe2d9558f3ca4584eda2afa9cc69c, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3412823385392814695, guid: 4fbfe2d9558f3ca4584eda2afa9cc69c, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3412823385392814695, guid: 4fbfe2d9558f3ca4584eda2afa9cc69c, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 3412823385392814695, guid: 4fbfe2d9558f3ca4584eda2afa9cc69c, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 3670039405636725873, guid: 4fbfe2d9558f3ca4584eda2afa9cc69c, type: 3}
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 3920850059529859426, guid: 4fbfe2d9558f3ca4584eda2afa9cc69c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3920850059529859426, guid: 4fbfe2d9558f3ca4584eda2afa9cc69c, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4040620129477218599, guid: 4fbfe2d9558f3ca4584eda2afa9cc69c, type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4040620129477218599, guid: 4fbfe2d9558f3ca4584eda2afa9cc69c, type: 3}
@@ -559,7 +587,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7614236444241573658, guid: 4fbfe2d9558f3ca4584eda2afa9cc69c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7614236444241573658, guid: 4fbfe2d9558f3ca4584eda2afa9cc69c, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7614236444241573658, guid: 4fbfe2d9558f3ca4584eda2afa9cc69c, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
