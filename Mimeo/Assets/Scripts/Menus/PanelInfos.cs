@@ -69,8 +69,8 @@ public class PanelInfos : MonoBehaviour
         textFieldDescription.text = _selectedElement.description;
         
         MeshRenderer selectedRenderer = _selectedElement.GetComponent<MeshRenderer>();
-        dropdownColor.value = GetIndexOfColor(selectedRenderer.material.color);
-        dropdownTexture.value = GetIndexOfTexture(selectedRenderer.material.mainTexture);
+        dropdownColor.value = GetIndexOf(selectedRenderer.material, colorMaterials);
+        dropdownTexture.value = GetIndexOf(selectedRenderer.material, textureMaterials);
         
         StartCoroutine(TranslateUIElementTo(transform, _openPosition));
         lineNameDisplay.SetActive(false);
@@ -180,32 +180,16 @@ public class PanelInfos : MonoBehaviour
     }
     
     /// <summary>
-    /// Gets the index of the color material in the colorMaterials array.
+    /// Gets the index of the specified material in the specified materials array.
     /// </summary>
-    /// <param name="colorToFind">The color to find in the array.</param>
-    /// <returns>The index of the color material or 0 if not found.</returns>
-    int GetIndexOfColor(Color colorToFind)
+    /// <param name="materialToFind">The material to find in the array.</param>
+    /// <param name="materialsArray">The array of materials to search through.</param>
+    /// <returns>The index of the material or 0 if not found.</returns>
+    int GetIndexOf(Material materialToFind, Material[] materialsArray)
     {
-        for (int i = 1; i < colorMaterials.Length; i++)
+        for (int i = 1; i < materialsArray.Length; i++)
         {
-            if (colorMaterials[i].color == colorToFind)
-            {
-                return i;
-            }
-        }
-        return 0;
-    }
-    
-    /// <summary>
-    /// Gets the index of the texture material in the textureMaterials array.
-    /// </summary>
-    /// <param name="textureToFind">The texture to find in the array.</param>
-    /// <returns>The index of the texture material or 0 if not found.</returns>
-    int GetIndexOfTexture(Texture textureToFind)
-    {
-        for (int i = 1; i < textureMaterials.Length; i++)
-        {
-            if (textureMaterials[i].mainTexture == textureToFind)
+            if (materialsArray[i] == materialToFind)
             {
                 return i;
             }
