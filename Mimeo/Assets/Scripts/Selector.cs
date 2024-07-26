@@ -53,6 +53,7 @@ public class Selector : MonoBehaviour
             BuildElement buildElementTouched = _raycastHit.transform.GetComponent<BuildElement>();
             if (!buildElementTouched)
             {
+                Unhighlight();
                 _previousHighlightForSFX = null;
                 return;
             }
