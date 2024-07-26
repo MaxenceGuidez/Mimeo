@@ -46,8 +46,6 @@ public class Selector : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (_actualHighlight) Unhighlight();
-        
         Vector2 middleScreen = new Vector2(Screen.width / 2, Screen.height / 2);
         Ray ray = playerCamera.ScreenPointToRay(middleScreen);
         if (Physics.Raycast(ray, out _raycastHit))
@@ -58,6 +56,8 @@ public class Selector : MonoBehaviour
                 _previousHighlightForSFX = null;
                 return;
             }
+            
+            if (buildElementTouched != _actualHighlight) Unhighlight();
             
             if (buildElementTouched.state == BuildElement.ElementState.UNUSED)
             {
@@ -74,9 +74,6 @@ public class Selector : MonoBehaviour
     private void Highlight()
     {
         _isHighlighting = true;
-
-        if (_actualHighlight.state != BuildElement.ElementState.UNUSED) return;
-        _actualHighlight.state = BuildElement.ElementState.HIGHLIGHTED;
         
         MeshRenderer highlightRenderer = _actualHighlight.GetComponent<MeshRenderer>();
         if (highlightRenderer)
@@ -111,6 +108,8 @@ public class Selector : MonoBehaviour
         }
         
         textName.text = _actualHighlight.name;
+        
+        _actualHighlight.state = BuildElement.ElementState.HIGHLIGHTED;
     }
 
     /// <summary>
@@ -121,6 +120,7 @@ public class Selector : MonoBehaviour
     public void Unhighlight()
     {
         if (!_isHighlighting) return;
+        if (!_actualHighlight) return;
         
         _actualHighlight.state = BuildElement.ElementState.UNUSED;
         

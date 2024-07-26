@@ -62,7 +62,7 @@ public class BuildElement : MonoBehaviour
         Material[] newMaterials = _renderer.materials;
         for (int i = 0; i < newMaterials.Length; i++)
         {
-            newMaterials[i].color = materialColor == null ? _originalMaterials[i].color : materialColor.color;
+            newMaterials[i].color = materialColor == null ? _originalMaterials[i].color : materialColor.color; // TODO : GetMaterialWithIndex() to PanelInfos and store here the index
         }
         _renderer.materials = newMaterials;
     }
